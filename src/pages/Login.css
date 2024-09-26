@@ -1,0 +1,81 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+
+  background-color: #486579;
+  max-width:460px;
+  margin: 3rem auto;
+  padding: 2rem;
+  border-radius: 1rem
+
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 320px;
+  height: 460px;
+  margin-bottom: 20px;
+  padding: 1rem 2rem;
+  border: 2px solid lightgray;
+  border-radius: .5rem;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  background-color: #1D4189;
+  padding: 1rem 2rem;
+  border-radius: .5rem;
+}
+
+.form-group>label {
+  color: white;
+  margin-right: .5rem;
+}
+
+/* .form-group>input{
+  height: 100px;
+} */
+
+#btn_login{
+  padding: 1rem;
+  font-size: 1.2rem;
+  border-radius: .5rem;
+  background-color: #D9D9D9
+}
+
+
+
+
+input[type="text"], input[type="password"] {
+
+  border: none;
+  background-color: #1D4189;
+  color: white;
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:enabled,
+  input:-webkit-autofill:read-write,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #1e54a1 inset !important;
+    /* Cor de fundo desejada */
+    -webkit-text-fill-color: #fff !important;
+    /* Cor do texto desejada */
+  }
+
+}
+
+.social-login-container {
+  text-align: center;
+}
+
+.social-buttons button {
+  margin: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
