@@ -1,0 +1,9 @@
+.div-footer {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    bottom: 0;
+    background-color: black;
+    color: white;
+}

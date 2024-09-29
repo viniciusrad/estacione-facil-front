@@ -1,19 +1,14 @@
 import React from 'react';
-import './Login.css'; // Importar estilo específico, se necessário
+import './Login.css';
+import { LogoDiv } from '../components/LogoDiv';
 
-const Login = () => {
+export const Login = () => {
   return (
 
-    // <h2>outro teste</h2>
     <div className="login-container">
       {/* Formulário de Login */}
       <form className="login-form">
-        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-          <div style={{maxWidth: '60px', maxHeight: '60px', marginRight: '1rem'}}>
-            <img src="/logo_estacione_facil.png" alt="teste" style={{width: '100%'}}/>
-          </div>
-          <h1>Entrar</h1>
-        </div>
+        <LogoDiv text='Entrar' />
 
         {/* Campo de usuário */}
         <div className="form-group">
@@ -45,4 +40,3 @@ const Login = () => {
   );
 };
 
-export default Login;

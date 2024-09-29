@@ -1,0 +1,19 @@
+/* h1{
+    color: red;
+} */
+
+.container-home{
+    max-width: 480px;
+    min-height: 120px;
+    display: flex;
+    justify-content:space-around;
+    color: white !important;
+}
+
+.item-menu-home{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+    text-align: center;
+}
