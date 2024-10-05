@@ -52,13 +52,14 @@
 
 
 input[type="text"],
+input[type="email"],
 input[type="password"] {
 
   border: none;
   background-color: #1D4189;
   color: white;
   border-radius: 25px;
-  padding: .2rem;
+  padding: .7rem;
 
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
