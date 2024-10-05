@@ -8,6 +8,7 @@
     display: flex;
     justify-content:space-around;
     color: white !important;
+    margin: 1rem auto;
 }
 
 .item-menu-home{
@@ -16,4 +17,14 @@
     align-items:center;
     justify-content: center;
     text-align: center;
+    margin: .5rem;
+}
+
+.home-body{
+    display: flex;
+    flex-direction: column;
+    /* height: 50%; */
+    align-items: center;
+    justify-content: space-between;
+    margin-top:3rem;
 }

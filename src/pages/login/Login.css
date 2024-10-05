@@ -43,8 +43,11 @@
 #btn_login{
   padding: 1rem;
   font-size: 1.2rem;
-  border-radius: .5rem;
-  background-color: #D9D9D9
+  border-radius: 2rem;
+  background-color: #D9D9D9;
+  color: #2E18B9;
+  font-weight: 900;
+  border: none;
 }
 
 
@@ -55,6 +58,8 @@ input[type="text"], input[type="password"] {
   border: none;
   background-color: #1D4189;
   color: white;
+  border-radius: 12px;
+  padding: .2rem;
 
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
@@ -63,7 +68,6 @@ input[type="text"], input[type="password"] {
   input:-webkit-autofill:read-write,
   input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px #1e54a1 inset !important;
-    /* Cor de fundo desejada */
     -webkit-text-fill-color: #fff !important;
     /* Cor do texto desejada */
   }
@@ -74,8 +78,15 @@ input[type="text"], input[type="password"] {
   text-align: center;
 }
 
+.social-buttons img {
+  width: 60px;
+
+}
+
 .social-buttons button {
   margin: 5px;
-  padding: 10px 20px;
+  padding: 1rem 3rem;
   cursor: pointer;
+  background-color: transparent !important;
+  border: none !important;
 }

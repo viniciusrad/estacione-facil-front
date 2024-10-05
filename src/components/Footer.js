@@ -7,8 +7,8 @@ export const Footer = () =>{
             <div>
                 <img src="/img/menu_sanduiche.png" alt="" />
             </div>
-            <div>vagas</div>
-            <div>voltar</div>
+            {/* <div>vagas</div>
+            <div>voltar</div> */}
         </div>
     )
 }

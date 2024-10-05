@@ -1,9 +1,22 @@
 .div-footer {
     width: 100%;
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: space-around;
     bottom: 0;
     background-color: black;
     color: white;
 }
+
+.container-logo {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    color: white;
+  }
+  
+  .image-box {
+    max-width: 120px;
+    max-height: 60px;
+    margin-right: 1rem;
+  }
