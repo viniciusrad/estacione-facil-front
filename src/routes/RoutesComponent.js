@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Login } from '../pages/login/Login.js'; // Importar o componente Login
 import { Home } from '../pages/home';
 import  FormularioVeiculo  from '../pages/veiculo/cadastro-veiculos.js';
+import CadastroProprietario from '../pages/proprietario/proprietario_carro.js';
+
 
 const AppRoutes = () => {
   return (
@@ -11,6 +13,7 @@ const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/veiculo/cadastro" element={<FormularioVeiculo />} />
+        <Route path="/proprietario/carro" element={<CadastroProprietario />} />
         {/* Outras rotas */}
       </Routes>
     </Router>

@@ -88,7 +88,7 @@ const Title = styled.h1`
 const Input = styled.input`
   background-color: #1D4189;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
   padding: 10px;
   margin-bottom: 20px;
   color: white;
