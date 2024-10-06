@@ -92,3 +92,65 @@ export const VagasList = styled.div`
 export const CadastrarButton = styled(Button)`
   background-color: #486579;
 `;
+
+
+export const SalvarButton = styled(Button)`
+  background-color: #2E18B9;
+`;
+
+export const RadioContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: #1D4189;
+  border-radius: 25px;
+  padding: 10px;ButtonContainer
+  margin-bottom: 20px;
+`;
+
+export const RadioInput = styled.input`
+  display: none;
+`;
+
+export const RadioLabel = styled.label`
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 20px;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  ${RadioInput}:checked + & {
+    background-color: #2E18B9;
+  }
+`;
+
+export const FormGroup = styled.div`
+  margin-bottom: 20px;
+  h3 {
+    color: white;
+    margin-bottom: 10px;
+  }
+`;
+
+export const BuscarButton = styled.button`
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  background-color: #2E18B9;
+`;
+
+export const RadioGroup = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  background-color: #1D4189;
+  border-radius: 25px;
+  padding: 10px;
+`;

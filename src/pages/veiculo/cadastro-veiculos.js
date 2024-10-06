@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import './cadastro-veiculo.css';
 import { LogoDiv } from '../../components/LogoDiv';
-import { Container, Input, ButtonContainer, Button, CancelButton, CadastrarButton } from '../../components/StyledComponents';
+import { Container, Input, ButtonContainer, CancelButton, CadastrarButton } from '../../components/StyledComponents';
 
 
 const CadastroVeiculo = () => {
