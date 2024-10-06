@@ -9,10 +9,15 @@ import {
     VagaItem,
     ButtonContainer,
     CancelButton,
-    ConfirmButton
+    ConfirmButton as BaseConfirmButton
 } from '../../components/StyledComponents';
 
-
+const StyledConfirmButton = styled(BaseConfirmButton)`
+    &:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+    }
+`;
 
 const ListaVagas = () => {
     const [showPopUp, setShowPopUp] = useState(false);
@@ -47,7 +52,13 @@ const ListaVagas = () => {
 
             <ButtonContainer>
                 <CancelButton>Cancelar</CancelButton>
-                <ConfirmButton className='btn-confirmar' onClick={() => setShowPopUp(true)}>Confirmar</ConfirmButton>
+                <StyledConfirmButton 
+                    className='btn-confirmar' 
+                    onClick={() => setShowPopUp(true)}
+                    disabled={vagaSelecionada === null}
+                >
+                    Confirmar
+                </StyledConfirmButton>
             </ButtonContainer>
 
             {showPopUp && (
