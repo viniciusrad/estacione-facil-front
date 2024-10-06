@@ -66,7 +66,7 @@ export const VagaItem = styled.div`
   background-color: #1D4189;
   border-radius: 25px;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
   color: white;
   cursor: pointer;
 
