@@ -103,7 +103,7 @@ export const RadioContainer = styled.div`
   flex-direction: column;
   background-color: #1D4189;
   border-radius: 25px;
-  padding: 10px;ButtonContainer
+  padding: 10px;ButtonContainer;
   margin-bottom: 20px;
 `;
 
