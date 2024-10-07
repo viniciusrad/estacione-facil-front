@@ -96,23 +96,27 @@ const ReservaVaga = () => {
                 <FormGroup>
                     <h3>Contratação por Hora</h3>
                     <Input
+                        style={{ margin: '0.3rem' }}
                         placeholder="Preço por hora"
                         value={precoHora}
                         onChange={(e) => setPrecoHora(e.target.value)}
                     />
                     <Input
+                        style={{ margin: '0.3rem' }}
                         type="time"
                         placeholder="Hora de chegada"
                         value={horaChegadaHora}
                         onChange={(e) => setHoraChegadaHora(e.target.value)}
                     />
                     <Input
+                        style={{ margin: '0.3rem' }}
                         type="time"
                         placeholder="Hora de saída"
                         value={horaSaidaHora}
                         onChange={(e) => setHoraSaidaHora(e.target.value)}
                     />
                     <Input
+                        style={{ margin: '0.3rem' }}
                         type="date"
                         placeholder="Dia"
                         value={diaHora}
@@ -125,23 +129,27 @@ const ReservaVaga = () => {
                 <FormGroup>
                     <h3>Contratação por Diária</h3>
                     <Input
+                        style={{ margin: '0.3rem' }}
                         placeholder="Preço máximo da diária"
                         value={precoDiaria}
                         onChange={(e) => setPrecoDiaria(e.target.value)}
                     />
                     <Input
+                        style={{ margin: '0.3rem' }}
                         type="date"
                         placeholder="Dia"
                         value={diaDiaria}
                         onChange={(e) => setDiaDiaria(e.target.value)}
                     />
                     <Input
+                        style={{ margin: '0.3rem' }}
                         type="time"
                         placeholder="Hora de chegada"
                         value={horaChegadaDiaria}
                         onChange={(e) => setHoraChegadaDiaria(e.target.value)}
                     />
                     <Input
+                        style={{ margin: '0.3rem' }}
                         placeholder="Quantidade de diárias"
                         value={quantidadeDiarias}
                         onChange={(e) => setQuantidadeDiarias(e.target.value)}
