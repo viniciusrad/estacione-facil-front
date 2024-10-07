@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import './Login.css';
 import { LogoDiv } from '../../components/LogoDiv';
+import MessagePopUp from '../../components/MessagePopUp';
 
 export const Login = () => {
 
@@ -11,12 +12,12 @@ export const Login = () => {
 
   const handleLogin = (event) => {
     event.preventDefault();
-    console.log(event)
-    console.log(userLogin)
-    console.log(userPassword)
 
-    if(userLogin == 'vinicius'){
+    if (userLogin === 'admin' && userPassword === 'admin') {
       navigate('/')
+    } else {
+      setShowPopUp(true);
+      setMessagePopUp('Usuário ou senha inválidos'); // Mensagem de erro do login
     }
   }
 
@@ -24,20 +25,27 @@ export const Login = () => {
     console.log(event.target.value)
     setUserLogin(event.target.value)
   }
-  
+
   const handlePasswordInput = (event) => {
     setUserPassword(event.target.value)
-
   }
 
   const [userLogin, setUserLogin] = useState('');
   const [userPassword, setUserPassword] = useState('');
-
-
+  const [showPopUp, setShowPopUp] = useState(false);
+  const [messagePopUp, setMessagePopUp] = useState('');
 
   return (
-
     <div className="login-container">
+      {showPopUp && (
+        <MessagePopUp
+          title="Erro de Login"
+          body={messagePopUp}
+          onCancel={() => setShowPopUp(false)}
+          onConfirm={() => setShowPopUp(false)}
+          onlyWarning={true}
+        />
+      )}
       {/* Formulário de Login */}
       <form className="login-form">
         <LogoDiv text='Entrar' />

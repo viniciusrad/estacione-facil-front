@@ -1,16 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const PopUp = ({ title, body, onCancel, onConfirm }) => {
+const PopUp = ({ title, body, onCancel, onConfirm, onlyWarning = false }) => {
   return (
     <Overlay>
       <PopUpContainer>
         <Title>{title}</Title>
         <Body>{body}</Body>
-        <ButtonContainer>
-          <CancelButton onClick={onCancel}>Cancelar</CancelButton>
-          <ConfirmButton onClick={onConfirm}>Confirmar</ConfirmButton>
-        </ButtonContainer>
+        {onlyWarning ? (
+          <ButtonContainer>
+            <WarningButton onClick={onCancel}>ok</WarningButton>
+          </ButtonContainer>
+        ) : (
+          <ButtonContainer>
+            <CancelButton onClick={onCancel}>Cancelar</CancelButton>
+            <ConfirmButton onClick={onConfirm}>Confirmar</ConfirmButton>
+          </ButtonContainer>
+        )}
       </PopUpContainer>
     </Overlay>
   );
@@ -71,6 +77,10 @@ const CancelButton = styled(Button)`
 
 const ConfirmButton = styled(Button)`
   background-color: #00FF00;
+`;
+const WarningButton = styled(Button)`
+  background-color: #e3b622;
+  margin: 0 auto;
 `;
 
 export default PopUp;

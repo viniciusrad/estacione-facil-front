@@ -97,6 +97,9 @@ export const CadastrarButton = styled(Button)`
 export const SalvarButton = styled(Button)`
   background-color: #2E18B9;
 `;
+export const WarningButton = styled(Button)`
+  background-color: #e3b622;
+`;
 
 export const RadioContainer = styled.div`
   display: flex;
