@@ -41,6 +41,8 @@ export const CancelButton = styled(Button)`
   background-color: lightgray;
   color: black;
   font-weight: bold;
+  width: fit-content;
+  padding: 1rem 2rem;
 `;
 
 export const ConfirmButton = styled(Button)`
@@ -90,7 +92,9 @@ export const VagasList = styled.div`
 `;
 
 export const CadastrarButton = styled(Button)`
-  background-color: #486579;
+  background-color: #2C10CA;
+  width: fit-content;
+  padding: 1rem 2rem;
 `;
 
 
