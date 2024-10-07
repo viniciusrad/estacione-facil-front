@@ -28,7 +28,7 @@ export const Home = () => {
                     </button>
                 </div>
                 <div className="container-home">
-                    <button className="item-menu-home" onClick={() => handleNavigation('/veiculo/escolher')}>
+                    <button className="item-menu-home" onClick={() => handleNavigation('/veiculo/lista')}>
                         <img src="/img/engarrafamento.png" alt="" />
                         <h4>Escolher Veículo</h4>
                     </button>
@@ -38,7 +38,7 @@ export const Home = () => {
                     </button>
                 </div>
                 <div className="container-home">
-                    <button className="item-menu-home" onClick={() => handleNavigation('/historico')}>
+                    <button className="item-menu-home" onClick={() => handleNavigation('/vagas/historico')}>
                         <img src="/img/historico.png" alt="" />
                         <h4>Histórico</h4>
                     </button>

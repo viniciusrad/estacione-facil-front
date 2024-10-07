@@ -8,6 +8,8 @@ import CadastroUsuario from '../pages/usuario/cadastro-usuario.js';
 import { Footer } from '../components/Footer.js';
 import ReservaVaga from '../pages/vagas/reserva-vaga.js';
 import ListaVagas from '../pages/vagas/listar-vagas.js';
+import ListarVeiculos from '../pages/veiculo/listar-veiculo.js';
+import HistoricoAgendamentos from '../pages/vagas/historico-agendamentos.js';
 
 const AppRoutesWithFooter = () => {
   const navigate = useNavigate();
@@ -18,10 +20,12 @@ const AppRoutesWithFooter = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/veiculo/cadastro" element={<FormularioVeiculo />} />
+        <Route path="/veiculo/lista" element={<ListarVeiculos />} />
         <Route path="/proprietario/carro" element={<CadastroProprietario />} />
         <Route path="/usuario/cadastro" element={<CadastroUsuario />} />
         <Route path="/vagas/reservar" element={<ReservaVaga />} />
         <Route path="/vagas/listar" element={<ListaVagas />} />
+        <Route path="/vagas/historico" element={<HistoricoAgendamentos />} />
       </Routes>
       <Footer navigate={navigate} />
     </>
