@@ -1,0 +1,46 @@
+/* Estilos gerais para todas as páginas */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #1E1E1E;
+    min-height: 100vh;
+}
+
+/* Estilos para formulários */
+form {
+    margin: 1rem auto;
+    width: 95%;
+    max-width: 400px;
+}
+
+/* Estilos para labels */
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #FFFFFF;
+    font-size: 16px;
+}
+
+/* Estilos para inputs */
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #2C2C2C;
+    color: #FFFFFF;
+}
+
+/* Estilos para botões */
+.btn-cadastrar,
+.btn-salvar,
+.btn-buscar,
+.btn-confirmar {
+    background-color: #2E18B9;
+    color: white;
+}
+
+/* Adicione aqui outros estilos específicos das páginas */

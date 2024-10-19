@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import './reserva-vaga.css';
+import '../pages.css';
 import { LogoDiv } from '../../components/LogoDiv';
 import PopUp from '../../components/MessagePopUp';
 import {
