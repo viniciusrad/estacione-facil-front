@@ -10,7 +10,8 @@ import ReservaVaga from '../pages/vagas/reserva-vaga.js';
 import ListaVagas from '../pages/vagas/listar-vagas.js';
 import ListarVeiculos from '../pages/veiculo/listar-veiculo.js';
 import HistoricoAgendamentos from '../pages/vagas/historico-agendamentos.js';
-
+import CadastroCartao from '../pages/cartao/cadastro-cartao.js';
+import MeuHistorico from '../pages/historico/meu-historico.js';
 const AppRoutesWithFooter = () => {
   const navigate = useNavigate();
 
@@ -26,6 +27,8 @@ const AppRoutesWithFooter = () => {
         <Route path="/vagas/reservar" element={<ReservaVaga />} />
         <Route path="/vagas/listar" element={<ListaVagas />} />
         <Route path="/vagas/historico" element={<HistoricoAgendamentos />} />
+        <Route path="/cartao/cadastro" element={<CadastroCartao />} />
+        <Route path="/historico/meu-historico" element={<MeuHistorico />} />
       </Routes>
       <Footer navigate={navigate} />
     </>
