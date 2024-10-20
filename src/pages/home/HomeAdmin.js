@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import MessagePopUp from '../../components/MessagePopUp';
 import { LogoDiv } from '../../components/LogoDiv';
+import { FaUserPlus, FaCheckCircle, FaList, FaCalendarCheck } from 'react-icons/fa';
 
 import { UsuarioContext } from '../../context/UsuarioContext';
 
@@ -16,27 +17,23 @@ function HomeAdmin({ handleNavigation }) {
                 <div className='home-body'>
                     <h2>Tipo de Usuário: {tipoUsuario}</h2>
                     <div className="container-home">
-                        <button className="item-menu-home" onClick={() => handleNavigation('/veiculo/cadastro')}>
-                            <img src="/img/carro.png" alt="" />
-                            <h4>Cadastrar Veículo</h4>
+                        <button className="item-menu-home" onClick={() => handleNavigation('/admin/cadastro')}>
+                            <FaUserPlus size={42} />
+                            <h4>Cadastrar Admin</h4>
                         </button>
-                        <button className="item-menu-home" onClick={() => handleNavigation('/vagas/reservar')}>
-                            <img src="/img/reserva_1.png" alt="" />
-                            <h4>Reservar Vaga</h4>
-                        </button>
-                        <button className="item-menu-home" onClick={() => handleNavigation('/cartao/cadastro')}>
-                            <img src="/img/pagamento-seguro.png" alt="" />
-                            <h4>Pagamento</h4>
+                        <button className="item-menu-home" onClick={() => handleNavigation('/vagas/aprovar')}>
+                            <FaCheckCircle size={42} />
+                            <h4>Aprovar Vaga</h4>
                         </button>
                     </div>
                     <div className="container-home">
-                        <button className="item-menu-home" onClick={() => handleNavigation('/veiculo/lista')}>
-                            <img src="/img/engarrafamento.png" alt="" />
-                            <h4>Escolher Veículo</h4>
+                        <button className="item-menu-home" onClick={() => handleNavigation('/vagas/lista')}>
+                            <FaList size={42} />
+                            <h4>Listar Vagas</h4>
                         </button>
-                        <button className="item-menu-home" onClick={() => handleNavigation('/agendamentos/meus-agendamentos')}>
-                            <img src="/img/reserva_2.png" alt="" />
-                            <h4>Agendamentos</h4>
+                        <button className="item-menu-home" onClick={() => handleNavigation('/vagas/disponibilidade')}>
+                            <FaCalendarCheck size={42} />
+                            <h4>Disponibilidade de Vagas</h4>
                         </button>
                     </div>
                     <div className="container-home">
