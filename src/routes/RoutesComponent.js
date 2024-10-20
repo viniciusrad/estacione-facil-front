@@ -15,6 +15,7 @@ import MeuHistorico from '../pages/historico/meu-historico.js';
 import MeusAgendamentos from '../pages/agendamentos/meus-agendamentos.js';
 import ApagarConta from '../pages/usuario/apagar-conta.js';
 import AtualizarUsuario from '../pages/usuario/atualizar-usuario.js';
+import CategoriaUsuario from '../pages/usuario/categoria.js';
 
 const AppRoutesWithFooter = () => {
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ const AppRoutesWithFooter = () => {
         <Route path="/historico/meu-historico" element={<MeuHistorico />} />
         <Route path="/agendamentos/meus-agendamentos" element={<MeusAgendamentos />} />
         <Route path="/usuario/atualizar" element={<AtualizarUsuario />} />
+        <Route path="/usuario/categoria" element={<CategoriaUsuario />} />
       </Routes>
       <Footer navigate={navigate} />
     </>
