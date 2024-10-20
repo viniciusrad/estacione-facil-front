@@ -17,6 +17,8 @@ import ApagarConta from '../pages/usuario/apagar-conta.js';
 import AtualizarUsuario from '../pages/usuario/atualizar-usuario.js';
 import CategoriaUsuario from '../pages/usuario/categoria.js';
 import CadastroUsuarioAdmin from '../pages/usuario/cadastro-usuario-admin.js';
+import AprovarVagas from '../pages/vagas/aprovar-vagas.js';
+
 const AppRoutesWithFooter = () => {
   const navigate = useNavigate();
 
@@ -39,6 +41,7 @@ const AppRoutesWithFooter = () => {
         <Route path="/usuario/atualizar" element={<AtualizarUsuario />} />
         <Route path="/usuario/categoria" element={<CategoriaUsuario />} />
         <Route path="/usuario/cadastro-admin" element={<CadastroUsuarioAdmin />} />
+        <Route path="/vagas/aprovar" element={<AprovarVagas />} />
       </Routes>
       <Footer navigate={navigate} />
     </>
