@@ -2,7 +2,7 @@ import './index.css';
 import { LogoDiv } from '../../components/LogoDiv';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import HomeAdm from './HomeAdm';
+import HomeCliente from './HomeCliente';
 import { UsuarioContext } from '../../context/UsuarioContext';
 
 
@@ -17,7 +17,9 @@ export const Home = () => {
 
     return (
         <>
-            {tipoUsuario == 'administrador' ? <HomeAdm handleNavigation={handleNavigation} /> : <h1>test</h1>}
+            {tipoUsuario == 'cliente' && <HomeCliente handleNavigation={handleNavigation} />}
+            {tipoUsuario == 'administrador' && <h1>Criarndo a home do adm</h1>}
+            {tipoUsuario == 'proprietario' && <h1>Criarndo a home do proprietario</h1>}
         </>
 
     )
