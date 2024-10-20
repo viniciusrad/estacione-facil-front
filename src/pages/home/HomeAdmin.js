@@ -17,7 +17,7 @@ function HomeAdmin({ handleNavigation }) {
                 <div className='home-body'>
                     <h2>Tipo de Usuário: {tipoUsuario}</h2>
                     <div className="container-home">
-                        <button className="item-menu-home" onClick={() => handleNavigation('/admin/cadastro')}>
+                        <button className="item-menu-home" onClick={() => handleNavigation('/usuario/cadastro-admin')}>
                             <FaUserPlus size={42} />
                             <h4>Cadastrar Admin</h4>
                         </button>
