@@ -16,13 +16,6 @@ import {
     BuscarButton,
 } from '../../components/StyledComponents';
 
-// Nota: Os seguintes componentes não foram encontrados no arquivo StyledComponents:
-// - RadioContainer
-// - RadioInput
-// - RadioLabel
-
-
-
 
 const ReservaVaga = () => {
     const [tipoVaga, setTipoVaga] = useState('ambas');
@@ -39,8 +32,8 @@ const ReservaVaga = () => {
 
     return (
         <Container style={{ minHeight: '800px' }}>
+            <LogoDiv text="Reserva de Vaga" />
             <form action="">
-                <LogoDiv text="Reserva de Vaga" />
                 <label style={stylePersonal.label}>Tipo de Vaga</label>
                 <RadioContainer>
                     <RadioInput
@@ -92,27 +85,23 @@ const ReservaVaga = () => {
                     <FormGroup>
                         <h3>Contratação por Hora</h3>
                         <Input
-                            style={{ margin: '0.3rem' }}
                             placeholder="Preço por hora"
                             value={precoHora}
                             onChange={(e) => setPrecoHora(e.target.value)}
                         />
                         <Input
-                            style={{ margin: '0.3rem' }}
                             type="time"
                             placeholder="Hora de chegada"
                             value={horaChegadaHora}
                             onChange={(e) => setHoraChegadaHora(e.target.value)}
                         />
                         <Input
-                            style={{ margin: '0.3rem' }}
                             type="time"
                             placeholder="Hora de saída"
                             value={horaSaidaHora}
                             onChange={(e) => setHoraSaidaHora(e.target.value)}
                         />
                         <Input
-                            style={{ margin: '0.3rem' }}
                             type="date"
                             placeholder="Dia"
                             value={diaHora}
@@ -124,27 +113,27 @@ const ReservaVaga = () => {
                     <FormGroup>
                         <h3>Contratação por Diária</h3>
                         <Input
-                            style={{ margin: '0.3rem' }}
+                            style={{ maxWidth: '80%' }}
                             placeholder="Preço máximo da diária"
                             value={precoDiaria}
                             onChange={(e) => setPrecoDiaria(e.target.value)}
                         />
                         <Input
-                            style={{ margin: '0.3rem' }}
+                            style={{ maxWidth: '80%' }}
                             type="date"
                             placeholder="Dia"
                             value={diaDiaria}
                             onChange={(e) => setDiaDiaria(e.target.value)}
                         />
                         <Input
-                            style={{ margin: '0.3rem' }}
+                            style={{ maxWidth: '80%' }}
                             type="time"
                             placeholder="Hora de chegada"
                             value={horaChegadaDiaria}
                             onChange={(e) => setHoraChegadaDiaria(e.target.value)}
                         />
                         <Input
-                            style={{ margin: '0.3rem' }}
+                            style={{ maxWidth: '80%' }}
                             placeholder="Quantidade de diárias"
                             value={quantidadeDiarias}
                             onChange={(e) => setQuantidadeDiarias(e.target.value)}
@@ -154,6 +143,8 @@ const ReservaVaga = () => {
                 <Input
                     placeholder="Buscar vaga"
                     value={buscarVaga}
+                    style={{ maxWidth: '90%' }}
+
                     onChange={(e) => setBuscarVaga(e.target.value)}
                 />
                 <BuscarButton className='btn-buscar'>Buscar</BuscarButton>
