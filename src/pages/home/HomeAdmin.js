@@ -4,7 +4,7 @@ import { LogoDiv } from '../../components/LogoDiv';
 
 import { UsuarioContext } from '../../context/UsuarioContext';
 
-function HomeCliente({ handleNavigation }) {
+function HomeAdmin({ handleNavigation }) {
 
     const { tipoUsuario } = useContext(UsuarioContext);
 
@@ -59,4 +59,4 @@ function HomeCliente({ handleNavigation }) {
     );
 }
 
-export default HomeCliente;
+export default HomeAdmin;
