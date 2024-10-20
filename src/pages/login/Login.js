@@ -1,10 +1,15 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './Login.css';
 import { LogoDiv } from '../../components/LogoDiv';
 import MessagePopUp from '../../components/MessagePopUp';
+import { UsuarioContext } from '../../context/UsuarioContext';
+
+
+
+
 
 export const Login = () => {
 
@@ -13,7 +18,12 @@ export const Login = () => {
   const handleLogin = (event) => {
     event.preventDefault();
 
-    if (userLogin === 'admin' && userPassword === 'admin') {
+    const tipoUsuario = verificarTipoUsuario(userLogin);
+
+    setTipoUsuario(tipoUsuario);
+
+    // if (userLogin === 'admin' && userPassword === 'admin') {
+    if (true) {
       navigate('/')
     } else {
       setShowPopUp(true);
@@ -34,6 +44,19 @@ export const Login = () => {
   const [userPassword, setUserPassword] = useState('');
   const [showPopUp, setShowPopUp] = useState(false);
   const [messagePopUp, setMessagePopUp] = useState('');
+
+
+  const { tipoUsuario, setTipoUsuario } = useContext(UsuarioContext);
+
+  const verificarTipoUsuario = (login) => {
+    if (login === 'admin') {
+      return 'administrador';
+    } else if (login === 'proprietario') {
+      return 'proprietario';
+    } else {
+      return 'cliente';
+    }
+  };
 
   return (
     <div className="login-container">
