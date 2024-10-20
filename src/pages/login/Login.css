@@ -6,7 +6,6 @@
 
   max-width: 460px;
   margin: 3rem auto;
-  padding: 2rem;
   border-radius: 1rem
 }
 
@@ -14,7 +13,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 320px;
+  max-width: 320px;
   height: 460px;
   margin-bottom: 20px;
   padding: 1rem 2rem;
