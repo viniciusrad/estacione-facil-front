@@ -41,6 +41,16 @@ const CadastroVaga = () => {
         setFotos([...fotos, ...arquivos]);
     };
 
+    const handleCancel = (e) => {
+        e.preventDefault();
+        console.log('Cancelar Cadastro de Vaga');
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Cadastrar Vaga');
+    };
+
     return (
         <Container style={{ minHeight: '800px' }}>
             <LogoDiv text="Cadastro de Vaga" />
@@ -170,8 +180,8 @@ const CadastroVaga = () => {
                 </FormGroup>
 
                 <ButtonContainer>
-                    <CancelButton>Cancelar</CancelButton>
-                    <CadastrarButton className='btn-cadastrar'>Cadastrar</CadastrarButton>
+                    <CancelButton onClick={(e) => handleCancel(e)}>Cancelar</CancelButton>
+                    <CadastrarButton className='btn-cadastrar' onClick={(e) => handleSubmit(e)}>Cadastrar</CadastrarButton>
                 </ButtonContainer>
             </form>
         </Container>
