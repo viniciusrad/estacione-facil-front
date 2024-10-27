@@ -27,7 +27,7 @@ function HomeAdmin({ handleNavigation }) {
                         </button>
                     </div>
                     <div className="container-home">
-                        <button className="item-menu-home" onClick={() => handleNavigation('/vagas/lista')}>
+                        <button className="item-menu-home" onClick={() => handleNavigation('/vagas/listar')}>
                             <FaList size={42} />
                             <h4>Listar Vagas</h4>
                         </button>

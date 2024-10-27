@@ -74,14 +74,14 @@ export const Login = () => {
         <LogoDiv text='Entrar' />
 
         {/* Campo de usuário */}
-        <div className="form-group">
           <label htmlFor="username">Usuário</label>
+        <div className="form-group">
           <input type="text" id="username" placeholder="Digite seu usuário" value={userLogin} onChange={handleLoginInput} />
         </div>
 
         {/* Campo de senha */}
-        <div className="form-group">
           <label htmlFor="password">Senha</label>
+        <div className="form-group">
           <input type="password" id="password" placeholder="Digite sua senha" value={userPassword} onChange={handlePasswordInput} />
         </div>
 

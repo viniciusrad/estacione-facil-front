@@ -14,7 +14,7 @@
   flex-direction: column;
   justify-content: space-around;
   max-width: 320px;
-  height: 460px;
+  /* height: 460px; */
   margin-bottom: 20px;
   padding: 1rem 2rem;
   border: 2px solid lightgray;

@@ -1,7 +1,10 @@
 import React, { useState, useContext } from 'react';
 import MessagePopUp from '../../components/MessagePopUp';
 import { LogoDiv } from '../../components/LogoDiv';
-import { FaUserPlus, FaCheckCircle, FaList, FaCalendarCheck } from 'react-icons/fa';
+import { FaUserPlus, FaCheckCircle, FaList, FaCalendarCheck, FaWpforms } from 'react-icons/fa';
+import { IoCalendarOutline } from "react-icons/io5";
+import { FaIdCard } from "react-icons/fa";
+
 
 import { UsuarioContext } from '../../context/UsuarioContext';
 
@@ -18,19 +21,19 @@ function HomeProprietario({ handleNavigation }) {
                 <div className='home-body'>
                     <h2>Tipo de Usuário: {tipoUsuario}</h2>
                     <div className="container-home">
-                        <button className="item-menu-home" onClick={() => handleNavigation('/usuario/cadastro-admin')}>
-                            <FaUserPlus size={42} />
-                            <h4>Cadastrar Admin</h4>
+                        <button className="item-menu-home" onClick={() => handleNavigation('/vagas/cadastrar')}>
+                            <FaWpforms size={42} />
+                            <h4>Cadastrar Vagas</h4>
                         </button>
-                        <button className="item-menu-home" onClick={() => handleNavigation('/vagas/aprovar')}>
-                            <FaCheckCircle size={42} />
-                            <h4>Aprovar Vaga</h4>
+                        <button className="item-menu-home" onClick={() => handleNavigation('/vagas/reservar')}>
+                            <IoCalendarOutline size={42} />
+                            <h4>Reservar Vagas</h4>
                         </button>
                     </div>
                     <div className="container-home">
-                        <button className="item-menu-home" onClick={() => handleNavigation('/vagas/lista')}>
-                            <FaList size={42} />
-                            <h4>Listar Vagas</h4>
+                        <button className="item-menu-home" onClick={() => handleNavigation('/dados-bancarios')}>
+                            <FaIdCard size={42} />
+                            <h4>Dados Bancarios</h4>
                         </button>
                         <button className="item-menu-home" onClick={() => handleNavigation('/vagas/disponibilidade')}>
                             <FaCalendarCheck size={42} />

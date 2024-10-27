@@ -16,6 +16,7 @@ export const Home = () => {
     };
 
     const { tipoUsuario } = useContext(UsuarioContext);
+    console.log(tipoUsuario);
 
     return (
         <>
