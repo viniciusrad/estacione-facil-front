@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import '../pages.css';
 import { LogoDiv } from '../../components/LogoDiv';
@@ -15,7 +15,7 @@ import {
     FormGroup,
     BuscarButton,
 } from '../../components/StyledComponents';
-
+import { VagasContext } from '../../context/VagasContext';
 
 const ReservaVaga = () => {
     const [tipoVaga, setTipoVaga] = useState('ambas');
@@ -29,11 +29,25 @@ const ReservaVaga = () => {
     const [horaChegadaDiaria, setHoraChegadaDiaria] = useState('');
     const [quantidadeDiarias, setQuantidadeDiarias] = useState('');
     const [buscarVaga, setBuscarVaga] = useState('');
+    const { vagas } = useContext(VagasContext);
+    const [vagasFiltradas, setVagasFiltradas] = useState([]);
+
+    const handleBuscarVagas = (e) => {
+        e.preventDefault();
+        // Filtrar vagas baseado nos critérios
+        const filtradas = vagas.filter(vaga => {
+            const matchTipo = tipoVaga === 'ambas' || vaga.tipo === tipoVaga;
+            const matchBusca = buscarVaga === '' || 
+                vaga.descricao.toLowerCase().includes(buscarVaga.toLowerCase());
+            return matchTipo && matchBusca;
+        });
+        setVagasFiltradas(filtradas);
+    };
 
     return (
         <Container style={{ minHeight: '800px' }}>
             <LogoDiv text="Reserva de Vaga" />
-            <form action="">
+            <form onSubmit={handleBuscarVagas}>
                 <label style={stylePersonal.label}>Tipo de Vaga</label>
                 <RadioContainer>
                     <RadioInput
@@ -147,14 +161,41 @@ const ReservaVaga = () => {
 
                     onChange={(e) => setBuscarVaga(e.target.value)}
                 />
-                <BuscarButton className='btn-buscar'>Buscar</BuscarButton>
-            </form >
+                <BuscarButton type="submit" className='btn-buscar'>Buscar</BuscarButton>
+            </form>
+
+            {/* Nova seção para exibir as vagas */}
+            {vagasFiltradas.length > 0 && (
+                <div style={stylePersonal.listaVagas}>
+                    <h3>Vagas Disponíveis</h3>
+                    {vagasFiltradas.map((vaga, index) => (
+                        <div key={index} style={stylePersonal.vagaItem}>
+                            <h4>Vaga {vaga.tipoVaga}</h4>
+                            <p>Tipo: {vaga.tipoContratacao}</p>
+                            <p>Preço: R$ {vaga.tipoContratacao === 'hora' ? vaga.precoHora : vaga.precoDiaria}</p>
+                            <p>{vaga.descricao}</p>
+                        </div>
+                    ))}
+                </div>
+            )}
         </Container>
     );
 };
 
 const stylePersonal = {
-    label: { textAlign: 'left', color: 'white', marginBottom: '10px' }
+    label: { textAlign: 'left', color: 'white', marginBottom: '10px' },
+    listaVagas: {
+        marginTop: '20px',
+        width: '100%',
+        color: 'white'
+    },
+    vagaItem: {
+        border: '1px solid #ccc',
+        borderRadius: '5px',
+        padding: '15px',
+        margin: '10px 0',
+        backgroundColor: 'rgba(255, 255, 255, 0.1)'
+    }
 };
 
 
