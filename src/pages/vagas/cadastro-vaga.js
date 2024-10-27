@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import '../pages.css';
 import { LogoDiv } from '../../components/LogoDiv';
@@ -15,8 +15,10 @@ import {
     FormGroup,
     CadastrarButton,
 } from '../../components/StyledComponents';
+import { VagasContext } from '../../context/VagasContext';
 
 const CadastroVaga = () => {
+    const { adicionarVaga } = useContext(VagasContext);
     const [tipoVaga, setTipoVaga] = useState('ambas');
     const [tipoContratacao, setTipoContratacao] = useState('hora');
     const [precoHora, setPrecoHora] = useState('');
@@ -48,7 +50,24 @@ const CadastroVaga = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Cadastrar Vaga');
+        const novaVaga = {
+            tipoVaga,
+            tipoContratacao,
+            endereco,
+            descricao,
+            fotos: fotos.map(foto => URL.createObjectURL(foto)),
+            ...(tipoContratacao === 'hora' ? {
+                precoHora,
+                horaInicio,
+                horaFim
+            } : {
+                precoDiaria,
+                diasDisponiveis
+            })
+        };
+        
+        adicionarVaga(novaVaga);
+        // Limpar formulário ou redirecionar
     };
 
     return (
