@@ -2,46 +2,81 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import '../pages.css';
 import { LogoDiv } from '../../components/LogoDiv';
-import { Container, Input, ButtonContainer, CancelButton, CadastrarButton } from '../../components/StyledComponents';
+import { 
+  Container, 
+  ButtonContainer, 
+  CancelButton, 
+  VagasList,
+  VagaItem 
+} from '../../components/StyledComponents';
+
+const AgendamentoItem = styled(VagaItem)`
+  .data-hora {
+    font-weight: bold;
+    color: #4CAF50;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+  }
+  
+  .local {
+    color: #ffffff;
+  }
+`;
 
 const MeusAgendamentos = () => {
-  const [login, setLogin] = useState('');
-  const [senha, setSenha] = useState('');
+  const [agendamentoSelecionado, setAgendamentoSelecionado] = useState(null);
+  
+  const agendamentos = [
+    {
+      id: 1,
+      data: '15/05/2024',
+      hora: '14:30',
+      local: 'Shopping Center - Vaga A1',
+      status: 'Confirmado'
+    },
+    {
+      id: 2,
+      data: '18/05/2024',
+      hora: '09:00',
+      local: 'Centro Empresarial - Vaga B3',
+      status: 'Pendente'
+    },
+    {
+      id: 3,
+      data: '20/05/2024',
+      hora: '16:45',
+      local: 'Estacionamento Central - Vaga C2',
+      status: 'Confirmado'
+    }
+  ];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Aqui você pode adicionar a lógica para processar o login e senha
-    console.log('Dados de agendamento:', { login, senha });
+  const handleAgendamentoClick = (id) => {
+    setAgendamentoSelecionado(id === agendamentoSelecionado ? null : id);
   };
 
   return (
     <Container style={{minHeight: '800px'}}>
       <LogoDiv text="Meus Agendamentos"/>
       
-      <form onSubmit={handleSubmit}>
-        <label style={stylePersonal.label}>Login</label>
-        <Input 
-          type="text"
-          placeholder="Digite seu login"
-          value={login}
-          onChange={(e) => setLogin(e.target.value)}
-          required
-        />
+      <VagasList>
+        {agendamentos.map(agendamento => (
+          <AgendamentoItem
+            key={agendamento.id}
+            className={agendamento.id === agendamentoSelecionado ? 'selected' : ''}
+            onClick={() => handleAgendamentoClick(agendamento.id)}
+          >
+            <span className="data-hora">
+              {agendamento.data} às {agendamento.hora}
+            </span>
+            <span className="local">{agendamento.local}</span>
+            <span>Status: {agendamento.status}</span>
+          </AgendamentoItem>
+        ))}
+      </VagasList>
 
-        <label style={stylePersonal.label}>Senha</label>
-        <Input
-          type="password"
-          placeholder="Digite sua senha"
-          value={senha}
-          onChange={(e) => setSenha(e.target.value)}
-          required
-        />
-
-        <ButtonContainer>
-          <CancelButton type="button">Cancelar</CancelButton>
-          <CadastrarButton type="submit" className='btn-cadastrar'>Excluir</CadastrarButton>
-        </ButtonContainer>
-      </form>
+      <ButtonContainer>
+        <CancelButton type="button">Voltar</CancelButton>
+      </ButtonContainer>
     </Container>
   );
 };
