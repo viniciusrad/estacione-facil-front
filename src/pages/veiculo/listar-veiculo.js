@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-// import './listar-veiculos.css';
 import { LogoDiv } from '../../components/LogoDiv';
 import PopUp from '../../components/MessagePopUp';
 import {
@@ -28,21 +27,45 @@ const VeiculoItem = styled(VagaItem)`
 `;
 
 const ListarVeiculos = () => {
-    // Estados para controlar o popup e o veículo selecionado
     const [showPopUp, setShowPopUp] = useState(false);
     const [veiculoSelecionado, setVeiculoSelecionado] = useState(null);
+    const [veiculosCadastrados, setVeiculosCadastrados] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    // Lista de veículos cadastrados (simulada)
-    const [veiculosCadastrados, setVeiculosCadastrados] = useState([
-        { id: 1, placa: 'ABC-1234', marca: 'Toyota', modelo: 'Corolla', ano: 2020 },
-        { id: 2, placa: 'DEF-5678', marca: 'Honda', modelo: 'Civic', ano: 2019 },
-        { id: 3, placa: 'GHI-9012', marca: 'Volkswagen', modelo: 'Golf', ano: 2021 },
-    ]);
+    useEffect(() => {
+        const fetchVeiculos = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/vehicles', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('Erro ao carregar veículos');
+                }
+                const data = await response.json();
+                setVeiculosCadastrados(data);
+            } catch (err) {
+                console.error('Erro detalhado:', err);
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    // Função para lidar com o clique em um veículo
-    const handleVeiculoClick = (veiculoId) => {
-        setVeiculoSelecionado(veiculoId === veiculoSelecionado ? null : veiculoId);
+        fetchVeiculos();
+    }, []);
+
+    const handleVeiculoClick = (veiculo) => {
+        setVeiculoSelecionado(veiculo === veiculoSelecionado ? null : veiculo);
     };
+
+    if (loading) return <Container><p>Carregando...</p></Container>;
+    if (error) return <Container><p>Erro: {error}</p></Container>;
 
     return (
         <Container style={{ minHeight: '800px' }}>
@@ -51,12 +74,12 @@ const ListarVeiculos = () => {
             <VagasList>
                 {veiculosCadastrados.map(veiculo => (
                     <VeiculoItem
-                        key={veiculo.id}
-                        className={veiculo.id === veiculoSelecionado ? 'selected' : ''}
-                        onClick={() => handleVeiculoClick(veiculo.id)}
+                        key={veiculo.licensePlate}
+                        className={veiculo === veiculoSelecionado ? 'selected' : ''}
+                        onClick={() => handleVeiculoClick(veiculo)}
                     >
-                        <span className="placa-span">{veiculo.placa}</span>
-                        <span>{`${veiculo.marca} ${veiculo.modelo} (${veiculo.ano})`}</span>
+                        <span className="placa-span">{veiculo.licensePlate}</span>
+                        <span>{`${veiculo.brand} ${veiculo.model} (${veiculo.year})`}</span>
                     </VeiculoItem>
                 ))}
             </VagasList>
@@ -75,7 +98,7 @@ const ListarVeiculos = () => {
             {showPopUp && (
                 <PopUp
                     title="Atenção"
-                    body={`Deseja selecionar o veículo ${veiculoSelecionado}?`}
+                    body={`Deseja selecionar o veículo ${veiculoSelecionado?.licensePlate}?`}
                     onCancel={() => setShowPopUp(false)}
                     onConfirm={() => {
                         // Lógica para confirmar a seleção do veículo
