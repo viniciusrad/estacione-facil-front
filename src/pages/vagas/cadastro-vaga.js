@@ -17,9 +17,12 @@ import {
 } from '../../components/StyledComponents';
 import { VagasContext } from '../../context/VagasContext';
 import PopUp from '../../components/MessagePopUp';
+import { UsuarioContext } from '../../context/UsuarioContext';
 
 const CadastroVaga = () => {
-    const { adicionarVaga } = useContext(VagasContext);
+    // const [proprietario, setProprietario] = useState('');
+    const { tipoUsuario } = useContext(UsuarioContext);
+    // const { adicionarVaga } = useContext(VagasContext);
     const [tipoVaga, setTipoVaga] = useState('ambas');
     const [tipoContratacao, setTipoContratacao] = useState('hora');
     const [precoHora, setPrecoHora] = useState('');
@@ -59,6 +62,7 @@ const CadastroVaga = () => {
             tipoContratacao,
             endereco,
             descricao,
+            proprietarioId: tipoUsuario,
             fotos: fotos.map(foto => URL.createObjectURL(foto)),
             ...(tipoContratacao === 'hora' ? {
                 precoHora,
