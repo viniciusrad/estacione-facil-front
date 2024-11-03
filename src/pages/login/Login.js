@@ -85,11 +85,18 @@ export const Login = () => {
           <input type="password" id="password" placeholder="Digite sua senha" value={userPassword} onChange={handlePasswordInput} />
         </div>
 
-        {/* Botão de login */}
-        {/* <button onClick={() => navigate('/')}>Ir para Home</button> */}
-
         <button type="submit" id="btn_login" onClick={handleLogin}>Login</button>
       </form>
+
+      {/* Botão de Cadastro */}
+      <div className="register-container">
+        <button 
+          className="register-button" 
+          onClick={() => navigate('/usuario/cadastro')}
+        >
+          Cadastrar-se
+        </button>
+      </div>
 
       {/* Contêineres para redes sociais */}
       <div className="social-login-container">

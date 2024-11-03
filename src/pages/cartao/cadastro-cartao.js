@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import '../pages.css';
 import { LogoDiv } from '../../components/LogoDiv';
 import { Container, Input, ButtonContainer, CancelButton, CadastrarButton } from '../../components/StyledComponents';
+import PopUp from '../../components/MessagePopUp';
 
 const CadastroCartao = () => {
     const [nome, setNome] = useState('');
@@ -10,10 +11,49 @@ const CadastroCartao = () => {
     const [codigoVerificacao, setCodigoVerificacao] = useState('');
     const [validade, setValidade] = useState('');
     const [salvarCartao, setSalvarCartao] = useState(false);
+    const [showPopUp, setShowPopUp] = useState(false);
+    const [popUpMessage, setPopUpMessage] = useState('');
+    const [popUpError, setPopUpError] = useState(false);
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const cartaoData = {
+            nomeNoCartao: nome,
+            numeroCartao: numeroCartao,
+            codigoVerificacao: codigoVerificacao,
+            validade: validade,
+            salvarParaFuturos: salvarCartao,
+            userId: "user-test-id",
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+        };
+
+        try {
+            const response = await fetch('http://localhost:3000/cartoes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(cartaoData),
+            });
+
+            if (!response.ok) {
+                throw new Error('Erro ao cadastrar cartão');
+            }
+
+            setPopUpMessage('Cartão cadastrado com sucesso!');
+            setPopUpError(false);
+        } catch (error) {
+            setPopUpMessage(error.message);
+            setPopUpError(true);
+        } finally {
+            setShowPopUp(true);
+        }
+    };
 
     return (
         <Container style={{ minHeight: '800px' }}>
-            <form action="">
+            <form onSubmit={handleSubmit}>
                 <LogoDiv text="Cadastro de Cartão" />
                 <label style={stylePersonal.label}>Nome no Cartão</label>
                 <Input
@@ -52,6 +92,15 @@ const CadastroCartao = () => {
                     <CadastrarButton className='btn-cadastrar'>Adicionar Cartão</CadastrarButton>
                 </ButtonContainer>
             </form>
+
+            {showPopUp && (
+                <PopUp
+                    title={popUpError ? "Erro" : "Sucesso"}
+                    body={popUpMessage}
+                    onCancel={() => setShowPopUp(false)}
+                    onlyWarning={true}
+                />
+            )}
         </Container>
     );
 };
