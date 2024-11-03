@@ -16,6 +16,7 @@ import {
     CadastrarButton,
 } from '../../components/StyledComponents';
 import { VagasContext } from '../../context/VagasContext';
+import PopUp from '../../components/MessagePopUp';
 
 const CadastroVaga = () => {
     const { adicionarVaga } = useContext(VagasContext);
@@ -29,6 +30,9 @@ const CadastroVaga = () => {
     const [endereco, setEndereco] = useState('');
     const [descricao, setDescricao] = useState('');
     const [fotos, setFotos] = useState([]);
+    const [showPopUp, setShowPopUp] = useState(false);
+    const [popUpMessage, setPopUpMessage] = useState('');
+    const [popUpError, setPopUpError] = useState(false);
 
     const handleDiaChange = (dia) => {
         if (diasDisponiveis.includes(dia)) {
@@ -48,7 +52,7 @@ const CadastroVaga = () => {
         console.log('Cancelar Cadastro de Vaga');
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const novaVaga = {
             tipoVaga,
@@ -65,15 +69,34 @@ const CadastroVaga = () => {
                 diasDisponiveis
             })
         };
-        
-        adicionarVaga(novaVaga);
-        // Limpar formulário ou redirecionar
+
+        try {
+            const response = await fetch('http://localhost:3000/vagas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(novaVaga),
+            });
+
+            if (!response.ok) {
+                throw new Error('Erro ao cadastrar vaga');
+            }
+
+            setPopUpMessage('Vaga cadastrada com sucesso!');
+            setPopUpError(false);
+        } catch (error) {
+            setPopUpMessage(error.message);
+            setPopUpError(true);
+        } finally {
+            setShowPopUp(true);
+        }
     };
 
     return (
         <Container style={{ minHeight: '800px' }}>
             <LogoDiv text="Cadastro de Vaga" />
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label style={stylePersonal.label}>Tipo de Vaga</label>
                 <RadioContainer>
                     <RadioInput
@@ -199,10 +222,19 @@ const CadastroVaga = () => {
                 </FormGroup>
 
                 <ButtonContainer>
-                    <CancelButton onClick={(e) => handleCancel(e)}>Cancelar</CancelButton>
-                    <CadastrarButton className='btn-cadastrar' onClick={(e) => handleSubmit(e)}>Cadastrar</CadastrarButton>
+                    <CancelButton type="button" onClick={() => console.log('Cancelar Cadastro de Vaga')}>Cancelar</CancelButton>
+                    <CadastrarButton type="submit">Cadastrar</CadastrarButton>
                 </ButtonContainer>
             </form>
+
+            {showPopUp && (
+                <PopUp
+                    title={popUpError ? "Erro" : "Sucesso"}
+                    body={popUpMessage}
+                    onCancel={() => setShowPopUp(false)}
+                    onlyWarning={true}
+                />
+            )}
         </Container>
     );
 };
