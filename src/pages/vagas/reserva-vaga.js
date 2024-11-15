@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import '../pages.css';
 import { LogoDiv } from '../../components/LogoDiv';
@@ -7,7 +7,6 @@ import {
     Input,
     ButtonContainer,
     CancelButton,
-    Select,
     RadioContainer,
     RadioInput,
     RadioLabel,
@@ -29,21 +28,41 @@ const ReservaVaga = () => {
     const [horaChegadaDiaria, setHoraChegadaDiaria] = useState('');
     const [quantidadeDiarias, setQuantidadeDiarias] = useState('');
     const [buscarVaga, setBuscarVaga] = useState('');
-    const { vagas } = useContext(VagasContext);
+    const [vagas, setVagas] = useState([]);
     const [vagasFiltradas, setVagasFiltradas] = useState([]);
+
+    useEffect(() => {
+        const fetchVagas = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/vagas');
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar vagas');
+                }
+                const data = await response.json();
+                setVagas(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchVagas();
+    }, []);
 
     const handleBuscarVagas = (e) => {
         e.preventDefault();
-        // Filtrar vagas baseado nos critérios
         const filtradas = vagas.filter(vaga => {
-            const matchTipo = tipoVaga === 'ambas' || vaga.tipo === tipoVaga;
+            const matchTipo = tipoVaga === 'ambas' ? true : vaga.tipoVaga === tipoVaga;
             const matchBusca = buscarVaga === '' || 
                 vaga.descricao.toLowerCase().includes(buscarVaga.toLowerCase());
-            return matchTipo && matchBusca;
+            const matchContratacao = tipoContratacao === 'hora' ? vaga.tipoContratacao === 'hora' : vaga.tipoContratacao === 'diaria';
+            
+            // Adicionando um log para verificar os valores
+            // console.log(`Filtrando vaga: ${vaga.descricao}, matchTipo: ${matchTipo}, matchBusca: ${matchBusca}, matchContratacao: ${matchContratacao}`);
+            
+            return matchTipo && matchBusca && matchContratacao;
         });
         setVagasFiltradas(filtradas);
     };
-
     return (
         <Container style={{ minHeight: '800px' }}>
             <LogoDiv text="Reserva de Vaga" />
@@ -158,14 +177,13 @@ const ReservaVaga = () => {
                     placeholder="Buscar vaga"
                     value={buscarVaga}
                     style={{ maxWidth: '90%' }}
-
                     onChange={(e) => setBuscarVaga(e.target.value)}
                 />
                 <BuscarButton type="submit" className='btn-buscar'>Buscar</BuscarButton>
             </form>
 
             {/* Nova seção para exibir as vagas */}
-            {vagasFiltradas.length > 0 && (
+            {vagasFiltradas.length > 0 ? (
                 <div style={stylePersonal.listaVagas}>
                     <h3>Vagas Disponíveis</h3>
                     {vagasFiltradas.map((vaga, index) => (
@@ -176,6 +194,10 @@ const ReservaVaga = () => {
                             <p>{vaga.descricao}</p>
                         </div>
                     ))}
+                </div>
+            ) : (
+                <div style={stylePersonal.listaVagas}>
+                    <h3>Nenhuma vaga encontrada</h3>
                 </div>
             )}
         </Container>
@@ -197,7 +219,5 @@ const stylePersonal = {
         backgroundColor: 'rgba(255, 255, 255, 0.1)'
     }
 };
-
-
 
 export default ReservaVaga;
