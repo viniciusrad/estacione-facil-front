@@ -9,7 +9,7 @@ import { VagasProvider } from './context/VagasContext';
 function App() {
 
   // const navigate = useNavigate();
-  const [tipoUsuario, setTipoUsuario] = useState('cliente');
+  const [tipoUsuario, setTipoUsuario] = useState('');
 
   return (
     <VagasProvider>

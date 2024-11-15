@@ -1,22 +1,25 @@
 import './index.css';
 import { LogoDiv } from '../../components/LogoDiv';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import HomeCliente from './HomeCliente';
 import HomeAdmin from './HomeAdmin';
 import HomeProprietario from './HomeProprietario';
 import { UsuarioContext } from '../../context/UsuarioContext';
 
-
 export const Home = () => {
     const navigate = useNavigate();
+    const { tipoUsuario } = useContext(UsuarioContext);
+
+    useEffect(() => {
+        if (!tipoUsuario) {
+            navigate('/login');
+        }
+    }, [tipoUsuario, navigate]);
 
     const handleNavigation = (path) => {
         navigate(path);
     };
-
-    const { tipoUsuario } = useContext(UsuarioContext);
-    console.log(tipoUsuario);
 
     return (
         <>
@@ -24,6 +27,5 @@ export const Home = () => {
             {tipoUsuario == 'administrador' && <HomeAdmin handleNavigation={handleNavigation}/>}
             {tipoUsuario == 'proprietario' && <HomeProprietario handleNavigation={handleNavigation}/>}
         </>
-
-    )
+    );
 }

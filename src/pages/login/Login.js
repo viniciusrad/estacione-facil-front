@@ -15,19 +15,37 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
 
-    const tipoUsuario = verificarTipoUsuario(userLogin);
+    try {
+      const response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          login: userLogin,
+          senha: userPassword
+        })
+      });
 
-    setTipoUsuario(tipoUsuario);
+      const data = await response.json();
+      console.log('Resposta do servidor:', data);
 
-    // if (userLogin === 'admin' && userPassword === 'admin') {
-    if (true) {
-      navigate('/')
-    } else {
+      // const tipoUsuario = verificarTipoUsuario(userLogin);
+      setTipoUsuario(data.usuario.tipo);
+
+      if (response.ok) {
+        navigate('/');
+      } else {
+        setShowPopUp(true);
+        setMessagePopUp('Usuário ou senha inválidos');
+      }
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
       setShowPopUp(true);
-      setMessagePopUp('Usuário ou senha inválidos'); // Mensagem de erro do login
+      setMessagePopUp('Erro ao conectar com o servidor');
     }
   }
 
