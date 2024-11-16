@@ -9,13 +9,13 @@ import { UsuarioContext } from '../../context/UsuarioContext';
 
 export const Home = () => {
     const navigate = useNavigate();
-    const { tipoUsuario } = useContext(UsuarioContext);
+    const { user } = useContext(UsuarioContext);
 
     useEffect(() => {
-        if (!tipoUsuario.tipo) {
+        if (!user.tipo) {
             navigate('/login');
         }
-    }, [tipoUsuario, navigate]);
+    }, [user, navigate]);
 
     const handleNavigation = (path) => {
         navigate(path);
@@ -23,9 +23,9 @@ export const Home = () => {
 
     return (
         <>
-            {tipoUsuario.tipo == 'cliente' && <HomeCliente handleNavigation={handleNavigation} />}
-            {tipoUsuario.tipo == 'administrador' && <HomeAdmin handleNavigation={handleNavigation}/>}
-            {tipoUsuario.tipo == 'proprietario' && <HomeProprietario handleNavigation={handleNavigation}/>}
+            {user.tipo == 'cliente' && <HomeCliente handleNavigation={handleNavigation} />}
+            {user.tipo == 'administrador' && <HomeAdmin handleNavigation={handleNavigation}/>}
+            {user.tipo == 'proprietario' && <HomeProprietario handleNavigation={handleNavigation}/>}
         </>
     );
 }

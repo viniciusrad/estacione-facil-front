@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import '../pages.css';
 import { LogoDiv } from '../../components/LogoDiv';
 import { Container, Input, ButtonContainer, CancelButton, CadastrarButton } from '../../components/StyledComponents';
+import { UsuarioContext } from '../../context/UsuarioContext';
 
 const CadastroVeiculo = () => {
+  const { user } = useContext(UsuarioContext);
   const [licensePlate, setLicensePlate] = useState('');
   const [renavam, setRenavam] = useState('');
   const [brand, setBrand] = useState('');
@@ -13,26 +15,24 @@ const CadastroVeiculo = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       const vehicleData = {
         licensePlate,
         renavam,
         brand,
         model,
-        year: parseInt(year) // Convertendo para número
+        year: parseInt(year),
+        proprietario: user.id
       };
 
-      const response = await fetch('localhost:3000/vehicles', {
+      const response = await fetch('http://localhost:3000/vehicles', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include', // Adicione esta linha
-
         body: JSON.stringify(vehicleData)
       });
-
       if (response.ok) {
         alert('Veículo cadastrado com sucesso!');
         // Limpar formulário

@@ -33,8 +33,7 @@ export const Login = () => {
       const data = await response.json();
       console.log('Resposta do servidor:', data);
 
-      // const tipoUsuario = verificarTipoUsuario(userLogin);
-      setTipoUsuario({tipo: data.usuario.tipo, id: data.usuario.id, nome: data.usuario.nome});
+      setUser({tipo: data.usuario.tipo, id: data.usuario.id, nome: data.usuario.nome});
 
       if (response.ok) {
         navigate('/');
@@ -64,17 +63,8 @@ export const Login = () => {
   const [messagePopUp, setMessagePopUp] = useState('');
 
 
-  const { tipoUsuario, setTipoUsuario } = useContext(UsuarioContext);
+  const { user, setUser } = useContext(UsuarioContext);
 
-  const verificarTipoUsuario = (login) => {
-    if (login === 'admin') {
-      return 'administrador';
-    } else if (login === 'proprietario') {
-      return 'proprietario';
-    } else {
-      return 'cliente';
-    }
-  };
 
   return (
     <div className="login-container">

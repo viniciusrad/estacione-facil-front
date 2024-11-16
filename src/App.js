@@ -8,14 +8,13 @@ import { VagasProvider } from './context/VagasContext';
 
 function App() {
 
-  // const navigate = useNavigate();
-  const [tipoUsuario, setTipoUsuario] = useState('');
+  const [user, setUser] = useState({tipo: '', id: 0, nome: '', nome: ''});
 
   return (
     <VagasProvider>
-      <UsuarioContext.Provider value={{ tipoUsuario, setTipoUsuario }}>
+      
+      <UsuarioContext.Provider value={{ user, setUser }}>
         <div className="App">
-          {/* <h1>teste</h1> */}
           <AppRoutes />
         </div>
       </UsuarioContext.Provider>
