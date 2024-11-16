@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import '../pages.css';
 import { LogoDiv } from '../../components/LogoDiv';
@@ -7,6 +8,7 @@ import { UsuarioContext } from '../../context/UsuarioContext';
 
 const CadastroVeiculo = () => {
   const { user } = useContext(UsuarioContext);
+  const navigate = useNavigate();
   const [licensePlate, setLicensePlate] = useState('');
   const [renavam, setRenavam] = useState('');
   const [brand, setBrand] = useState('');
@@ -51,6 +53,10 @@ const CadastroVeiculo = () => {
     }
   };
 
+  const handleCancel = () => {
+    navigate('/');
+  };
+
   return (
     <Container style={{ minHeight: '800px' }}>
       <form onSubmit={handleSubmit}>
@@ -88,7 +94,7 @@ const CadastroVeiculo = () => {
           onChange={(e) => setYear(e.target.value)}
         />
         <ButtonContainer>
-          <CancelButton type="button">Cancelar</CancelButton>
+          <CancelButton type="button" onClick={handleCancel}>Cancelar</CancelButton>
           <CadastrarButton type="submit" className='btn-cadastrar'>Adicionar</CadastrarButton>
         </ButtonContainer>
       </form>
