@@ -18,7 +18,7 @@ import { VagasContext } from '../../context/VagasContext';
 
 const ReservaVaga = () => {
     const [tipoVaga, setTipoVaga] = useState('ambas');
-    const [tipoContratacao, setTipoContratacao] = useState('hora');
+    const [tipoContratacao, setTipoContratacao] = useState('ambas');
     const [precoHora, setPrecoHora] = useState('');
     const [horaChegadaHora, setHoraChegadaHora] = useState('');
     const [horaSaidaHora, setHoraSaidaHora] = useState('');
@@ -52,13 +52,16 @@ const ReservaVaga = () => {
         e.preventDefault();
         const filtradas = vagas.filter(vaga => {
             const matchTipo = tipoVaga === 'ambas' ? true : vaga.tipoVaga === tipoVaga;
-            const matchBusca = buscarVaga === '' || 
+            const matchBusca = buscarVaga === '' ||
                 vaga.descricao.toLowerCase().includes(buscarVaga.toLowerCase());
-            const matchContratacao = tipoContratacao === 'hora' ? vaga.tipoContratacao === 'hora' : vaga.tipoContratacao === 'diaria';
-            
-            // Adicionando um log para verificar os valores
-            // console.log(`Filtrando vaga: ${vaga.descricao}, matchTipo: ${matchTipo}, matchBusca: ${matchBusca}, matchContratacao: ${matchContratacao}`);
-            
+
+            let matchContratacao;
+            if (tipoContratacao === 'ambas') {
+                matchContratacao = true;
+            } else {
+                matchContratacao = vaga.tipoContratacao === tipoContratacao;
+            }
+
             return matchTipo && matchBusca && matchContratacao;
         });
         setVagasFiltradas(filtradas);
@@ -94,7 +97,18 @@ const ReservaVaga = () => {
                     />
                     <RadioLabel htmlFor="descoberta">Vaga Descoberta</RadioLabel>
                 </RadioContainer>
+                <label style={stylePersonal.label}>Tipo de Contratação</label>
+
                 <RadioGroup>
+                    <RadioLabel>
+                        <RadioInput
+                            type="radio"
+                            value="ambas"
+                            checked={tipoContratacao === 'ambas'}
+                            onChange={(e) => setTipoContratacao(e.target.value)}
+                        />
+                        Ambas
+                    </RadioLabel>
                     <RadioLabel>
                         <RadioInput
                             type="radio"
@@ -102,7 +116,7 @@ const ReservaVaga = () => {
                             checked={tipoContratacao === 'hora'}
                             onChange={(e) => setTipoContratacao(e.target.value)}
                         />
-                        Contratação por Hora
+                        por Hora
                     </RadioLabel>
                     <RadioLabel>
                         <RadioInput
@@ -111,7 +125,7 @@ const ReservaVaga = () => {
                             checked={tipoContratacao === 'diaria'}
                             onChange={(e) => setTipoContratacao(e.target.value)}
                         />
-                        Contratação por Diária
+                        por Diária
                     </RadioLabel>
                 </RadioGroup>
                 {tipoContratacao === 'hora' && (
@@ -183,21 +197,47 @@ const ReservaVaga = () => {
             </form>
 
             {/* Nova seção para exibir as vagas */}
+
+            
             {vagasFiltradas.length > 0 ? (
                 <div style={stylePersonal.listaVagas}>
-                    <h3>Vagas Disponíveis</h3>
+                    <h3 style={stylePersonal.tituloVagas}>Vagas Disponíveis</h3>
                     {vagasFiltradas.map((vaga, index) => (
                         <div key={index} style={stylePersonal.vagaItem}>
-                            <h4>Vaga {vaga.tipoVaga}</h4>
-                            <p>Tipo: {vaga.tipoContratacao}</p>
-                            <p>Preço: R$ {vaga.tipoContratacao === 'hora' ? vaga.precoHora : vaga.precoDiaria}</p>
-                            <p>{vaga.descricao}</p>
+                            <div style={stylePersonal.fotosContainer}>
+                                {vaga.fotos && vaga.fotos.length > 0 ? (
+                                    vaga.fotos.map((foto, idx) => (
+                                        <img
+                                            key={idx}
+                                            src={foto}
+                                            alt={`Vaga ${index + 1} - Foto ${idx + 1}`}
+                                            style={stylePersonal.foto}
+                                        />
+                                    ))
+                                ) : (
+                                    <img
+                                        src="caminho/para/imagem-padrao.jpg"
+                                        alt="Imagem padrão"
+                                        style={stylePersonal.foto}
+                                    />
+                                )}
+                            </div>
+                            <div style={stylePersonal.infoContainer}>
+                                <h4 style={stylePersonal.tituloVaga}>
+                                    Vaga {vaga.tipoVaga.charAt(0).toUpperCase() + vaga.tipoVaga.slice(1)}
+                                </h4>
+                                <p><strong>Tipo de Contratação:</strong> {vaga.tipoContratacao === 'hora' ? 'Por Hora' : 'Por Diária'}</p>
+                                <p><strong>Preço:</strong> R$ {vaga.tipoContratacao === 'hora' ? vaga.precoHora : vaga.precoDiaria}</p>
+                                <p><strong>Endereço:</strong> {vaga.endereco}</p>
+                                <p><strong>Descrição:</strong> {vaga.descricao}</p>
+                                <p><strong>Status:</strong> {vaga.status.charAt(0).toUpperCase() + vaga.status.slice(1)}</p>
+                            </div>
                         </div>
                     ))}
                 </div>
             ) : (
                 <div style={stylePersonal.listaVagas}>
-                    <h3>Nenhuma vaga encontrada</h3>
+                    <h3 style={stylePersonal.tituloVagas}>Nenhuma vaga encontrada</h3>
                 </div>
             )}
         </Container>
@@ -209,14 +249,72 @@ const stylePersonal = {
     listaVagas: {
         marginTop: '20px',
         width: '100%',
-        color: 'white'
+        color: 'white',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '0 10px'
+    },
+    tituloVagas: {
+        fontSize: '1.5em',
+        marginBottom: '20px',
+        textAlign: 'center'
     },
     vagaItem: {
-        border: '1px solid #ccc',
-        borderRadius: '5px',
+        width: '90%',
+        maxWidth: '400px',
+        borderRadius: '15px',
         padding: '15px',
         margin: '10px 0',
-        backgroundColor: 'rgba(255, 255, 255, 0.1)'
+        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        transition: 'transform 0.2s, box-shadow 0.2s',
+    },
+    vagaItemHover: {
+        transform: 'scale(1.02)',
+        boxShadow: '0 6px 12px rgba(0, 0, 0, 0.3)',
+    },
+    fotosContainer: {
+        display: 'flex',
+        gap: '10px',
+        marginBottom: '15px',
+        overflowX: 'auto',
+        width: '100%',
+        justifyContent: 'center'
+    },
+    foto: {
+        width: '100%',
+        maxWidth: '150px',
+        height: '100px',
+        objectFit: 'cover',
+        borderRadius: '10px',
+    },
+    infoContainer: {
+        width: '100%',
+        textAlign: 'left',
+    },
+    tituloVaga: {
+        fontSize: '1.2em',
+        marginBottom: '10px',
+        textAlign: 'center'
+    },
+    '@media (max-width: 600px)': {
+        vagaItem: {
+            padding: '10px',
+        },
+        foto: {
+            maxWidth: '120px',
+            height: '80px',
+        },
+        tituloVagas: {
+            fontSize: '1.2em',
+        },
+        tituloVaga: {
+            fontSize: '1em',
+        },
     }
 };
 
