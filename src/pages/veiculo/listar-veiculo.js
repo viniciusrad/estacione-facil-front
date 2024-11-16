@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { LogoDiv } from '../../components/LogoDiv';
 import PopUp from '../../components/MessagePopUp';
@@ -10,6 +10,7 @@ import {
     CancelButton,
     ConfirmButton as BaseConfirmButton
 } from '../../components/StyledComponents';
+import { UsuarioContext } from '../../context/UsuarioContext';
 
 // Estiliza o botão de confirmação para ficar desabilitado quando não houver seleção
 const StyledConfirmButton = styled(BaseConfirmButton)`
@@ -27,6 +28,7 @@ const VeiculoItem = styled(VagaItem)`
 `;
 
 const ListarVeiculos = () => {
+    const { user } = useContext(UsuarioContext);
     const [showPopUp, setShowPopUp] = useState(false);
     const [veiculoSelecionado, setVeiculoSelecionado] = useState(null);
     const [veiculosCadastrados, setVeiculosCadastrados] = useState([]);
@@ -36,7 +38,7 @@ const ListarVeiculos = () => {
     useEffect(() => {
         const fetchVeiculos = async () => {
             try {
-                const response = await fetch('http://localhost:3000/vehicles', {
+                const response = await fetch(`http://localhost:3000/vehicles/proprietario/${user.id}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -57,8 +59,10 @@ const ListarVeiculos = () => {
             }
         };
 
-        fetchVeiculos();
-    }, []);
+        if (user && user.id) {
+            fetchVeiculos();
+        }
+    }, [user]);
 
     const handleVeiculoClick = (veiculo) => {
         setVeiculoSelecionado(veiculo === veiculoSelecionado ? null : veiculo);
