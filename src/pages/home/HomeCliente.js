@@ -14,7 +14,7 @@ function HomeCliente({ handleNavigation }) {
             <div>
                 <LogoDiv text='Home' />
                 <div className='home-body'>
-                    <h2>Tipo de Usuário: {tipoUsuario}</h2>
+                    <h2>Tipo de Usuário: {tipoUsuario.tipo}</h2>
                     <div className="container-home">
                         <button className="item-menu-home" onClick={() => handleNavigation('/veiculo/cadastro')}>
                             <img src="/img/carro.png" alt="" />

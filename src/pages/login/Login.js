@@ -34,7 +34,7 @@ export const Login = () => {
       console.log('Resposta do servidor:', data);
 
       // const tipoUsuario = verificarTipoUsuario(userLogin);
-      setTipoUsuario(data.usuario.tipo);
+      setTipoUsuario({tipo: data.usuario.tipo, id: data.usuario.id, nome: data.usuario.nome});
 
       if (response.ok) {
         navigate('/');

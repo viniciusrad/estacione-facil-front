@@ -12,7 +12,7 @@ export const Home = () => {
     const { tipoUsuario } = useContext(UsuarioContext);
 
     useEffect(() => {
-        if (!tipoUsuario) {
+        if (!tipoUsuario.tipo) {
             navigate('/login');
         }
     }, [tipoUsuario, navigate]);
@@ -23,9 +23,9 @@ export const Home = () => {
 
     return (
         <>
-            {tipoUsuario == 'cliente' && <HomeCliente handleNavigation={handleNavigation} />}
-            {tipoUsuario == 'administrador' && <HomeAdmin handleNavigation={handleNavigation}/>}
-            {tipoUsuario == 'proprietario' && <HomeProprietario handleNavigation={handleNavigation}/>}
+            {tipoUsuario.tipo == 'cliente' && <HomeCliente handleNavigation={handleNavigation} />}
+            {tipoUsuario.tipo == 'administrador' && <HomeAdmin handleNavigation={handleNavigation}/>}
+            {tipoUsuario.tipo == 'proprietario' && <HomeProprietario handleNavigation={handleNavigation}/>}
         </>
     );
 }
