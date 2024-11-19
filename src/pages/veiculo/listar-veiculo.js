@@ -11,6 +11,7 @@ import {
     ConfirmButton as BaseConfirmButton
 } from '../../components/StyledComponents';
 import { UsuarioContext } from '../../context/UsuarioContext';
+import { useNavigate } from 'react-router-dom';
 
 // Estiliza o botão de confirmação para ficar desabilitado quando não houver seleção
 const StyledConfirmButton = styled(BaseConfirmButton)`
@@ -29,6 +30,7 @@ const VeiculoItem = styled(VagaItem)`
 
 const ListarVeiculos = () => {
     const { user } = useContext(UsuarioContext);
+    const navigate = useNavigate();
     const [showPopUp, setShowPopUp] = useState(false);
     const [veiculoSelecionado, setVeiculoSelecionado] = useState(null);
     const [veiculosCadastrados, setVeiculosCadastrados] = useState([]);
@@ -89,7 +91,7 @@ const ListarVeiculos = () => {
             </VagasList>
 
             <ButtonContainer>
-                <CancelButton>Cancelar</CancelButton>
+                <CancelButton onClick={() => navigate('/')}>Cancelar</CancelButton>
                 <StyledConfirmButton 
                     className='btn-confirmar' 
                     onClick={() => setShowPopUp(true)}
