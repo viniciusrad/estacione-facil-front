@@ -5,7 +5,7 @@ import { LogoDiv } from '../../components/LogoDiv';
 import { Container, Input, ButtonContainer, CancelButton, CadastrarButton } from '../../components/StyledComponents';
 import PopUp from '../../components/MessagePopUp';
 import { UsuarioContext } from '../../context/UsuarioContext';
-
+import { useNavigate } from 'react-router-dom';
 const CadastroCartao = () => {
     const user = useContext(UsuarioContext);
     const [nome, setNome] = useState('');
@@ -16,7 +16,7 @@ const CadastroCartao = () => {
     const [showPopUp, setShowPopUp] = useState(false);
     const [popUpMessage, setPopUpMessage] = useState('');
     const [popUpError, setPopUpError] = useState(false);
-
+    const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -92,7 +92,7 @@ const CadastroCartao = () => {
                     <CheckboxLabel>Salvar cartão para futuros pagamentos</CheckboxLabel>
                 </CheckboxContainer>
                 <ButtonContainer>
-                    <CancelButton>Cancelar</CancelButton>
+                    <CancelButton onClick={() => navigate('/')}>Cancelar</CancelButton>
                     <CadastrarButton className='btn-cadastrar'>Adicionar Cartão</CadastrarButton>
                 </ButtonContainer>
             </form>
