@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import '../pages.css';
 import { LogoDiv } from '../../components/LogoDiv';
 import { Container, Input, ButtonContainer, CancelButton, CadastrarButton } from '../../components/StyledComponents';
 import PopUp from '../../components/MessagePopUp';
+import { UsuarioContext } from '../../context/UsuarioContext';
 
 const CadastroCartao = () => {
+    const user = useContext(UsuarioContext);
     const [nome, setNome] = useState('');
     const [numeroCartao, setNumeroCartao] = useState('');
     const [codigoVerificacao, setCodigoVerificacao] = useState('');
@@ -17,13 +19,15 @@ const CadastroCartao = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        console.log(user.user);
         const cartaoData = {
             nomeNoCartao: nome,
             numeroCartao: numeroCartao,
             codigoVerificacao: codigoVerificacao,
             validade: validade,
             salvarParaFuturos: salvarCartao,
-            userId: "user-test-id",
+            userId: user.user.id,
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString()
         };
