@@ -15,8 +15,10 @@ import {
     BuscarButton,
 } from '../../components/StyledComponents';
 import { VagasContext } from '../../context/VagasContext';
+import { useNavigate } from 'react-router-dom';
 
 const ReservaVaga = () => {
+    const navigate = useNavigate();
     const [tipoVaga, setTipoVaga] = useState('ambas');
     const [tipoContratacao, setTipoContratacao] = useState('ambas');
     const [precoHora, setPrecoHora] = useState('');
@@ -66,6 +68,11 @@ const ReservaVaga = () => {
         });
         setVagasFiltradas(filtradas);
     };
+
+    const handleVagaClick = (vaga) => {
+        navigate('/detalhes-reserva', { state: { vaga } });
+    };
+
     return (
         <Container style={{ minHeight: '800px' }}>
             <LogoDiv text="Reserva de Vaga" />
@@ -203,7 +210,11 @@ const ReservaVaga = () => {
                 <div style={stylePersonal.listaVagas}>
                     <h3 style={stylePersonal.tituloVagas}>Vagas Disponíveis</h3>
                     {vagasFiltradas.map((vaga, index) => (
-                        <div key={index} style={stylePersonal.vagaItem}>
+                        <div 
+                            key={index} 
+                            style={{...stylePersonal.vagaItem, cursor: 'pointer'}}
+                            onClick={() => handleVagaClick(vaga)}
+                        >
                             <div style={stylePersonal.fotosContainer}>
                                 {vaga.fotos && vaga.fotos.length > 0 ? (
                                     vaga.fotos.map((foto, idx) => (

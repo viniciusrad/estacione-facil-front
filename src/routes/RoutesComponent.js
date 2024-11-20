@@ -20,6 +20,7 @@ import CadastroUsuarioAdmin from '../pages/usuario/cadastro-usuario-admin.js';
 import AprovarVagas from '../pages/vagas/aprovar-vagas.js';
 import DadosBancarios from '../pages/dados-bancarios/DadosBancarios.js';
 import CadastroVaga from '../pages/vagas/cadastro-vaga.js';
+import DetalhesReserva from '../pages/vagas/detalhes-reserva';
 const AppRoutesWithFooter = () => {
   const navigate = useNavigate();
 
@@ -45,6 +46,7 @@ const AppRoutesWithFooter = () => {
         <Route path="/vagas/aprovar" element={<AprovarVagas />} />
         <Route path="/dados-bancarios" element={<DadosBancarios />} />
         <Route path="/vagas/cadastro" element={<CadastroVaga />} />
+        <Route path="/detalhes-reserva" element={<DetalhesReserva />} />
       </Routes>
       <Footer navigate={navigate} />
     </>
