@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import '../pages.css';
 import { LogoDiv } from '../../components/LogoDiv';
 import {
@@ -20,11 +21,12 @@ import PopUp from '../../components/MessagePopUp';
 import { UsuarioContext } from '../../context/UsuarioContext';
 
 const CadastroVaga = () => {
+    const navigate = useNavigate();
     // const [proprietario, setProprietario] = useState('');
-    const { tipoUsuario } = useContext(UsuarioContext);
+    const { user } = useContext(UsuarioContext);
     // const { adicionarVaga } = useContext(VagasContext);
     const [tipoVaga, setTipoVaga] = useState('ambas');
-    const [tipoContratacao, setTipoContratacao] = useState('hora');
+    const [tipoContratacao, setTipoContratacao] = useState('ambas');
     const [precoHora, setPrecoHora] = useState('');
     const [horaInicio, setHoraInicio] = useState('');
     const [horaFim, setHoraFim] = useState('');
@@ -62,7 +64,8 @@ const CadastroVaga = () => {
             tipoContratacao,
             endereco,
             descricao,
-            proprietarioId: tipoUsuario,
+            proprietarioId: user.id,
+            status: 'indisponivel',
             fotos: fotos.map(foto => URL.createObjectURL(foto)),
             ...(tipoContratacao === 'hora' ? {
                 precoHora,
@@ -129,28 +132,35 @@ const CadastroVaga = () => {
                     <RadioLabel htmlFor="descoberta">Vaga Descoberta</RadioLabel>
                 </RadioContainer>
 
-                <RadioGroup>
-                    <RadioLabel>
-                        <RadioInput
-                            type="radio"
-                            value="hora"
-                            checked={tipoContratacao === 'hora'}
-                            onChange={(e) => setTipoContratacao(e.target.value)}
-                        />
-                        Contratação por Hora
-                    </RadioLabel>
-                    <RadioLabel>
-                        <RadioInput
-                            type="radio"
-                            value="diaria"
-                            checked={tipoContratacao === 'diaria'}
-                            onChange={(e) => setTipoContratacao(e.target.value)}
-                        />
-                        Contratação por Diária
-                    </RadioLabel>
-                </RadioGroup>
+                <label style={stylePersonal.label}>Tipo de Contratação</label>
+                <RadioContainer>
+                    <RadioInput
+                        type="radio"
+                        id="ambas-contratacao"
+                        value="ambas"
+                        checked={tipoContratacao === 'ambas'}
+                        onChange={(e) => setTipoContratacao(e.target.value)}
+                    />
+                    <RadioLabel htmlFor="ambas-contratacao">Ambas</RadioLabel>
+                    <RadioInput
+                        type="radio"
+                        id="hora"
+                        value="hora"
+                        checked={tipoContratacao === 'hora'}
+                        onChange={(e) => setTipoContratacao(e.target.value)}
+                    />
+                    <RadioLabel htmlFor="hora">Por Hora</RadioLabel>
+                    <RadioInput
+                        type="radio"
+                        id="diaria"
+                        value="diaria"
+                        checked={tipoContratacao === 'diaria'}
+                        onChange={(e) => setTipoContratacao(e.target.value)}
+                    />
+                    <RadioLabel htmlFor="diaria">Por Diária</RadioLabel>
+                </RadioContainer>
 
-                {tipoContratacao === 'hora' && (
+                {(tipoContratacao === 'hora' || tipoContratacao === 'ambas') && (
                     <FormGroup>
                         <h3>Configuração por Hora</h3>
                         <Input
@@ -173,7 +183,7 @@ const CadastroVaga = () => {
                     </FormGroup>
                 )}
 
-                {tipoContratacao === 'diaria' && (
+                {(tipoContratacao === 'diaria' || tipoContratacao === 'ambas') && (
                     <FormGroup>
                         <h3>Configuração por Diária</h3>
                         <Input
@@ -226,7 +236,7 @@ const CadastroVaga = () => {
                 </FormGroup>
 
                 <ButtonContainer>
-                    <CancelButton type="button" onClick={() => console.log('Cancelar Cadastro de Vaga')}>Cancelar</CancelButton>
+                    <CancelButton type="button" onClick={() => navigate('/')}>Cancelar</CancelButton>
                     <CadastrarButton type="submit">Cadastrar</CadastrarButton>
                 </ButtonContainer>
             </form>
