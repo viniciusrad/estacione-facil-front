@@ -71,6 +71,8 @@ export const VagaItem = styled.div`
   margin-bottom: 16px;
   color: white;
   cursor: pointer;
+  min-height: 80px;
+  align-items: center;
 
   &.selected {
     background-color: #2E18B9;
@@ -89,6 +91,8 @@ export const VagasList = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+  align-items: center;
+  min-height: 70px;
 `;
 
 export const CadastrarButton = styled(Button)`
