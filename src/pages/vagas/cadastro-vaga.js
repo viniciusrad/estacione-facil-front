@@ -47,11 +47,6 @@ const CadastroVaga = () => {
         }
     };
 
-    const handleFotoUpload = (e) => {
-        const arquivos = Array.from(e.target.files);
-        setFotos([...fotos, ...arquivos]);
-    };
-
     const handleCancel = (e) => {
         e.preventDefault();
         console.log('Cancelar Cadastro de Vaga');
@@ -66,7 +61,7 @@ const CadastroVaga = () => {
             descricao,
             proprietarioId: user.id,
             status: 'indisponivel',
-            fotos: fotos.map(foto => URL.createObjectURL(foto)),
+            fotos: fotos.filter(url => url.trim() !== '').join(','),
             ...(tipoContratacao === 'hora' ? {
                 precoHora,
                 horaInicio,
@@ -218,21 +213,52 @@ const CadastroVaga = () => {
                         value={descricao}
                         onChange={(e) => setDescricao(e.target.value)}
                     />
-                    <FileInput
-                        type="file"
-                        multiple
-                        accept="image/*"
-                        onChange={handleFotoUpload}
-                    />
-                    <FotosPreview>
-                        {fotos.map((foto, index) => (
-                            <PreviewImage
-                                key={index}
-                                src={URL.createObjectURL(foto)}
-                                alt={`Foto ${index + 1}`}
+                    {fotos.map((url, index) => (
+                        <div key={index} style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
+                            <Input
+                                type="text"
+                                placeholder="URL da imagem"
+                                value={url}
+                                onChange={(e) => {
+                                    const novasUrls = [...fotos];
+                                    novasUrls[index] = e.target.value;
+                                    setFotos(novasUrls);
+                                }}
                             />
-                        ))}
-                    </FotosPreview>
+                            <button 
+                                type="button"
+                                onClick={() => {
+                                    const novasUrls = fotos.filter((_, i) => i !== index);
+                                    setFotos(novasUrls);
+                                }}
+                                style={{
+                                    backgroundColor: '#ff4444',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '5px',
+                                    padding: '0 15px',
+                                    cursor: 'pointer'
+                                }}
+                            >
+                                X
+                            </button>
+                        </div>
+                    ))}
+                    <button 
+                        type="button"
+                        onClick={() => setFotos([...fotos, ''])}
+                        style={{
+                            backgroundColor: '#2E18B9',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '5px',
+                            padding: '10px 20px',
+                            cursor: 'pointer',
+                            marginTop: '10px'
+                        }}
+                    >
+                        Adicionar Nova Imagem
+                    </button>
                 </FormGroup>
 
                 <ButtonContainer>
