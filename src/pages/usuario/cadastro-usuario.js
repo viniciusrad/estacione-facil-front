@@ -57,10 +57,11 @@ const CadastroUsuario = () => {
                 cpf,
                 telefone,
                 senha,
-                tipo: tipoUsuario
+                tipo: tipoUsuario,
+                vehicles: []
             };
 
-            const response = await fetch('http://localhost:3000/proprietario/cadastro', {
+            const response = await fetch('http://localhost:3000/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
