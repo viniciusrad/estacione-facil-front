@@ -16,6 +16,8 @@ const CadastroUsuarioAdmin = () => {
     const [email, setEmail] = useState('');
     const [cpf, setCpf] = useState('');
     const [telefone, setTelefone] = useState('');
+    const [senha, setSenha] = useState('');
+    const [confirmarSenha, setConfirmarSenha] = useState('');
     const [showPopUp, setShowPopUp] = useState(false);
     const [popUpMessage, setPopUpMessage] = useState({ title: '', body: '' });
 
@@ -28,6 +30,7 @@ const CadastroUsuarioAdmin = () => {
                 email,
                 cpf,
                 telefone,
+                senha,
                 tipo: 'admin'
             };
 
@@ -99,6 +102,22 @@ const CadastroUsuarioAdmin = () => {
                     placeholder="Telefone"
                     value={telefone}
                     onChange={(e) => setTelefone(e.target.value)}
+                />
+
+                <label style={stylePersonal.label}>Senha</label>
+                <Input
+                    type="password"
+                    placeholder="Senha"
+                    value={senha}
+                    onChange={(e) => setSenha(e.target.value)}
+                />
+
+                <label style={stylePersonal.label}>Confirmar Senha</label>
+                <Input
+                    type="password"
+                    placeholder="Confirmar Senha"
+                    value={confirmarSenha}
+                    onChange={(e) => setConfirmarSenha(e.target.value)}
                 />
 
                 <ButtonContainer>
