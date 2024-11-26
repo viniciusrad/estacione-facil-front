@@ -21,32 +21,35 @@ import AprovarVagas from '../pages/vagas/aprovar-vagas.js';
 import DadosBancarios from '../pages/dados-bancarios/DadosBancarios.js';
 import CadastroVaga from '../pages/vagas/cadastro-vaga.js';
 import DetalhesReserva from '../pages/vagas/detalhes-reserva';
+import DisponibilidadeVagas from '../pages/vagas/disponibilidade.vagas.js';
+
 const AppRoutesWithFooter = () => {
   const navigate = useNavigate();
 
   return (
     <>
       <Routes>
-        <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
+        <Route path="/agendamentos/meus-agendamentos" element={<MeusAgendamentos />} />
+        <Route path="/cartao/cadastro" element={<CadastroCartao />} />
+        <Route path="/dados-bancarios" element={<DadosBancarios />} />
+        <Route path="/detalhes-reserva" element={<DetalhesReserva />} />
+        <Route path="/historico/meu-historico" element={<MeuHistorico />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/proprietario/carro" element={<CadastroProprietario />} />
+        <Route path="/usuario/apagar-conta" element={<ApagarConta />} />
+        <Route path="/usuario/atualizar" element={<AtualizarUsuario />} />
+        <Route path="/usuario/cadastro" element={<CadastroUsuario />} />
+        <Route path="/usuario/cadastro-admin" element={<CadastroUsuarioAdmin />} />
+        <Route path="/usuario/categoria" element={<CategoriaUsuario />} />
+        <Route path="/vagas/aprovar" element={<AprovarVagas />} />
+        <Route path="/vagas/cadastro" element={<CadastroVaga />} />
+        <Route path="/vagas/disponibilidade" element={<DisponibilidadeVagas />} />
+        <Route path="/vagas/historico" element={<HistoricoAgendamentos />} />
+        <Route path="/vagas/listar" element={<ListaVagas />} />
+        <Route path="/vagas/reservar" element={<ReservaVaga />} />
         <Route path="/veiculo/cadastro" element={<FormularioVeiculo />} />
         <Route path="/veiculo/lista" element={<ListarVeiculos />} />
-        <Route path="/proprietario/carro" element={<CadastroProprietario />} />
-        <Route path="/usuario/cadastro" element={<CadastroUsuario />} />
-        <Route path="/usuario/apagar-conta" element={<ApagarConta />} />
-        <Route path="/vagas/reservar" element={<ReservaVaga />} />
-        <Route path="/vagas/listar" element={<ListaVagas />} />
-        <Route path="/vagas/historico" element={<HistoricoAgendamentos />} />
-        <Route path="/cartao/cadastro" element={<CadastroCartao />} />
-        <Route path="/historico/meu-historico" element={<MeuHistorico />} />
-        <Route path="/agendamentos/meus-agendamentos" element={<MeusAgendamentos />} />
-        <Route path="/usuario/atualizar" element={<AtualizarUsuario />} />
-        <Route path="/usuario/categoria" element={<CategoriaUsuario />} />
-        <Route path="/usuario/cadastro-admin" element={<CadastroUsuarioAdmin />} />
-        <Route path="/vagas/aprovar" element={<AprovarVagas />} />
-        <Route path="/dados-bancarios" element={<DadosBancarios />} />
-        <Route path="/vagas/cadastro" element={<CadastroVaga />} />
-        <Route path="/detalhes-reserva" element={<DetalhesReserva />} />
       </Routes>
       <Footer navigate={navigate} />
     </>

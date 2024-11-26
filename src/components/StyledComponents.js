@@ -73,6 +73,7 @@ export const VagaItem = styled.div`
   cursor: pointer;
   min-height: 80px;
   align-items: center;
+  width: 90%;
 
   &.selected {
     background-color: #2E18B9;
