@@ -2,11 +2,8 @@ import React, { useState, useContext } from 'react';
 import MessagePopUp from '../../components/MessagePopUp';
 import { LogoDiv } from '../../components/LogoDiv';
 
-import { UsuarioContext } from '../../context/UsuarioContext';
-
 function HomeCliente({ handleNavigation }) {
 
-    const { user } = useContext(UsuarioContext);
 
 
     return (
@@ -14,7 +11,6 @@ function HomeCliente({ handleNavigation }) {
             <div>
                 <LogoDiv text='Home' />
                 <div className='home-body'>
-                    <h2>Tipo de Usuário: {user.tipo}</h2>
                     <div className="container-home">
                         <button className="item-menu-home" onClick={() => handleNavigation('/veiculo/cadastro')}>
                             <img src="/img/carro.png" alt="" />

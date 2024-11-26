@@ -3,11 +3,8 @@ import MessagePopUp from '../../components/MessagePopUp';
 import { LogoDiv } from '../../components/LogoDiv';
 import { FaUserPlus, FaCheckCircle, FaList, FaCalendarCheck } from 'react-icons/fa';
 
-import { UsuarioContext } from '../../context/UsuarioContext';
 
 function HomeAdmin({ handleNavigation }) {
-
-    const { tipoUsuario } = useContext(UsuarioContext);
 
 
     return (

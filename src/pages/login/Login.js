@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './Login.css';
@@ -12,6 +12,7 @@ import { UsuarioContext } from '../../context/UsuarioContext';
 
 
 export const Login = () => {
+
 
   const navigate = useNavigate();
 
@@ -33,7 +34,7 @@ export const Login = () => {
       const data = await response.json();
       console.log('Resposta do servidor:', data);
 
-      setUser({tipo: data.usuario.tipo, id: data.usuario.id, nome: data.usuario.nome});
+      setUser({ tipo: data.usuario.tipo, id: data.usuario.id, nome: data.usuario.nome });
 
       if (response.ok) {
         navigate('/');
@@ -62,8 +63,11 @@ export const Login = () => {
   const [showPopUp, setShowPopUp] = useState(false);
   const [messagePopUp, setMessagePopUp] = useState('');
 
-
   const { user, setUser } = useContext(UsuarioContext);
+
+  useEffect(() => {
+    setUser(null);
+  }, []);
 
 
   return (
@@ -82,13 +86,13 @@ export const Login = () => {
         <LogoDiv text='Entrar' />
 
         {/* Campo de usuário */}
-          <label htmlFor="username">Usuário</label>
+        <label htmlFor="username">Usuário</label>
         <div className="form-group">
           <input type="text" id="username" placeholder="Digite seu usuário" value={userLogin} onChange={handleLoginInput} />
         </div>
 
         {/* Campo de senha */}
-          <label htmlFor="password">Senha</label>
+        <label htmlFor="password">Senha</label>
         <div className="form-group">
           <input type="password" id="password" placeholder="Digite sua senha" value={userPassword} onChange={handlePasswordInput} />
         </div>
@@ -98,8 +102,8 @@ export const Login = () => {
 
       {/* Botão de Cadastro */}
       <div className="register-container">
-        <button 
-          className="register-button" 
+        <button
+          className="register-button"
           onClick={() => navigate('/usuario/cadastro')}
         >
           Cadastrar-se
