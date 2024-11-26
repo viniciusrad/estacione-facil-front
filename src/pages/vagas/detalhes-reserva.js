@@ -10,6 +10,8 @@ const DetalhesReserva = () => {
   const { user } = useContext(UsuarioContext);
   const { vaga } = location.state || {};
 
+  const isAdmin = user?.tipo === 'administrador';
+
   const [reserva, setReserva] = useState({
     clienteId: user?.id,
     vagaId: vaga?.id,
@@ -24,7 +26,6 @@ const DetalhesReserva = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(reserva);
     try {
       const response = await fetch('http://localhost:3000/agendamentos', {
         method: 'POST',
@@ -53,7 +54,7 @@ const DetalhesReserva = () => {
 
   return (
     <Container style={{ minHeight: '800px' }}>
-      <LogoDiv text="Detalhes da Reserva" />
+      <LogoDiv text="Detalhes da Vaga" />
       <div style={styles.vagaInfo}>
         <h3>Informações da Vaga</h3>
         <p><strong>Tipo:</strong> {vaga?.tipoVaga}</p>
@@ -62,44 +63,63 @@ const DetalhesReserva = () => {
            por {vaga?.tipoContratacao}</p>
       </div>
 
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <Input
-          type="date"
-          required
-          value={reserva.dataInicio}
-          onChange={(e) => setReserva({...reserva, dataInicio: e.target.value})}
-          style={styles.input}
-        />
-        
-        <Input
-          type="date"
-          required
-          value={reserva.dataFim}
-          onChange={(e) => setReserva({...reserva, dataFim: e.target.value})}
-          style={styles.input}
-        />
+      {isAdmin ? (
+        <div style={styles.fotosContainer}>
+          <h3 style={{ color: 'white' }}>Fotos da Vaga</h3>
+          <div style={styles.fotosGrid}>
+            {vaga?.fotos?.map((foto, index) => (
+              <img 
+                key={index}
+                src={foto}
+                alt={`Foto ${index + 1} da vaga`}
+                style={styles.foto}
+              />
+            ))}
+            {(!vaga?.fotos || vaga.fotos.length === 0) && (
+              <p style={{ color: 'white' }}>Nenhuma foto disponível</p>
+            )}
+          </div>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} style={styles.form}>
+          <Input
+            type="date"
+            required
+            value={reserva.dataInicio}
+            onChange={(e) => setReserva({...reserva, dataInicio: e.target.value})}
+            style={styles.input}
+          />
+          
+          <Input
+            type="date"
+            required
+            value={reserva.dataFim}
+            onChange={(e) => setReserva({...reserva, dataFim: e.target.value})}
+            style={styles.input}
+          />
 
-        <Input
-          type="time"
-          required
-          value={reserva.horarioInicio}
-          onChange={(e) => setReserva({...reserva, horarioInicio: e.target.value})}
-          style={styles.input}
-        />
+          <Input
+            type="time"
+            required
+            value={reserva.horarioInicio}
+            onChange={(e) => setReserva({...reserva, horarioInicio: e.target.value})}
+            style={styles.input}
+          />
 
-        <Input
-          type="time"
-          required
-          value={reserva.horarioFim}
-          onChange={(e) => setReserva({...reserva, horarioFim: e.target.value})}
-          style={styles.input}
-        />
+          <Input
+            type="time"
+            required
+            value={reserva.horarioFim}
+            onChange={(e) => setReserva({...reserva, horarioFim: e.target.value})}
+            style={styles.input}
+          />
 
-        <ButtonContainer>
-          <CancelButton type="button" onClick={handleCancel}>Cancelar</CancelButton>
-          <CadastrarButton type="submit">Confirmar Reserva</CadastrarButton>
-        </ButtonContainer>
-      </form>
+          <ButtonContainer>
+            <CancelButton type="button" onClick={handleCancel}>Cancelar</CancelButton>
+            <CadastrarButton type="submit">Confirmar Reserva</CadastrarButton>
+          </ButtonContainer>
+        </form>
+      )}
     </Container>
   );
 };
@@ -123,6 +143,23 @@ const styles = {
   },
   input: {
     marginBottom: '15px'
+  },
+  fotosContainer: {
+    width: '90%',
+    maxWidth: '800px',
+    marginTop: '20px'
+  },
+  fotosGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+    gap: '20px',
+    marginTop: '15px'
+  },
+  foto: {
+    width: '100%',
+    height: '200px',
+    objectFit: 'cover',
+    borderRadius: '8px'
   }
 };
 

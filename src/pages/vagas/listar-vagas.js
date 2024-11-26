@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import '../pages.css';
 import { LogoDiv } from '../../components/LogoDiv';
 import PopUp from '../../components/MessagePopUp';
+import { useNavigate } from 'react-router-dom';
 import {
     Container,
     VagasList,
@@ -20,23 +21,35 @@ const StyledConfirmButton = styled(BaseConfirmButton)`
 `;
 
 const ListaVagas = () => {
+    const navigate = useNavigate();
     const [showPopUp, setShowPopUp] = useState(false);
 
     const [vagaSelecionada, setVagaSelecionada] = useState(null);
-    const [vagasDisponiveis, setVagasDisponiveis] = useState([
-        { id: 1, local: 'Estacionamento A', tipo: 'Coberta', endereco: 'Rua A, 123' },
-        { id: 2, local: 'Estacionamento B', tipo: 'Descoberta', endereco: 'Rua B, 456' },
-        { id: 3, local: 'Estacionamento C', tipo: 'Coberta', endereco: 'Rua C, 789' },
-    ]);
+    const [vagasDisponiveis, setVagasDisponiveis] = useState([]);
 
     const handleVagaClick = (vagaId) => {
         setVagaSelecionada(vagaId === vagaSelecionada ? null : vagaId);
+
+        navigate('/detalhes-reserva', { state: { vaga: vagasDisponiveis.find(vaga => vaga.id === vagaId) } });
     };
+
+    const buscarVagas = async () => {
+        const response = await fetch('http://localhost:3000/vagas');
+        const data = await response.json();
+        setVagasDisponiveis(data);
+    };
+
+    useEffect(() => {
+        buscarVagas();
+    }, []);
 
     return (
         <Container style={{ minHeight: '800px' }}>
             <LogoDiv text="Vagas Disponíveis" />
 
+            {vagasDisponiveis.length === 0 && (
+                <p>Nenhuma vaga disponível no momento.</p>
+            )}
             <VagasList>
                 {vagasDisponiveis.map(vaga => (
                     <VagaItem

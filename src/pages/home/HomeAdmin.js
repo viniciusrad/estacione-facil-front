@@ -27,10 +27,6 @@ function HomeAdmin({ handleNavigation }) {
                             <FaList size={42} />
                             <h4>Listar Vagas</h4>
                         </button>
-                        <button className="item-menu-home" onClick={() => handleNavigation('/vagas/disponibilidade')}>
-                            <FaCalendarCheck size={42} />
-                            <h4>Disponibilidade de Vagas</h4>
-                        </button>
                     </div>
                     <div className="container-home">
                         <button className="item-menu-home" onClick={() => handleNavigation('/vagas/historico')}>
