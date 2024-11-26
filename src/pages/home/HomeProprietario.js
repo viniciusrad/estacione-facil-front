@@ -19,7 +19,6 @@ function HomeProprietario({ handleNavigation }) {
             <div>
                 <LogoDiv text='Home' />
                 <div className='home-body'>
-                    <h2>Tipo de Usuário: {tipoUsuario}</h2>
                     <div className="container-home">
                         <button className="item-menu-home" onClick={() => handleNavigation('/vagas/cadastro')}>
                             <FaWpforms size={42} />
