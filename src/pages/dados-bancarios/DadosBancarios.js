@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { LogoDiv } from '../../components/LogoDiv';
 import MessagePopUp from '../../components/MessagePopUp';
 import styled from 'styled-components';
-
+import { UsuarioContext } from '../../context/UsuarioContext';
 import {
     ConfirmButton as BaseConfirmButton
 } from '../../components/StyledComponents';
@@ -16,10 +16,12 @@ const StyledConfirmButton = styled(BaseConfirmButton)`
 `;
 
 function DadosBancarios() {
+    const { user } = useContext(UsuarioContext);
     const [dadosBancarios, setDadosBancarios] = useState({
         banco: '',
         agencia: '',
-        conta: ''
+        contaCorrente: '',
+        userId: user?.id
     });
 
     const [message, setMessage] = useState({
@@ -36,14 +38,26 @@ function DadosBancarios() {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Aqui você implementará a lógica para salvar os dados bancários
-        setMessage({
-            show: true,
-            message: 'Dados bancários salvos com sucesso!',
-            isError: false
-        });
+
+        try {
+            const response = await fetch('http://localhost:3000/dados-bancarios', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dadosBancarios)
+            });
+
+            setMessage({
+                show: true,
+                message: 'Dados bancários salvos com sucesso!',
+                isError: false
+            });
+        } catch (error) {
+            console.error('Erro ao salvar dados bancários:', error);
+        }
     };
 
     const stylePersonal = {
@@ -86,8 +100,8 @@ function DadosBancarios() {
                     <div className='form-group'>
                         <input
                             type="text"
-                            name="conta"
-                            value={dadosBancarios.conta}
+                            name="contaCorrente"
+                            value={dadosBancarios.contaCorrente}
                             onChange={handleChange}
                             required
                             placeholder="Número da conta"
@@ -107,7 +121,8 @@ function DadosBancarios() {
 
             {message.show && (
                 <MessagePopUp
-                    message={message.message}
+                    title="Dados Bancários"
+                    body={message.message}
                     isError={message.isError}
                     onConfirm={() => setMessage({ ...message, show: false })}
                     onClose={() => setMessage({ ...message, show: false })}
