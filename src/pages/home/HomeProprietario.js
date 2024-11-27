@@ -24,10 +24,10 @@ function HomeProprietario({ handleNavigation }) {
                             <FaWpforms size={42} />
                             <h4>Cadastrar Vagas</h4>
                         </button>
-                        <button className="item-menu-home" onClick={() => handleNavigation('/vagas/reservar')}>
+                        {/* <button className="item-menu-home" onClick={() => handleNavigation('/vagas/reservar')}>
                             <IoCalendarOutline size={42} />
                             <h4>Reservar Vagas</h4>
-                        </button>
+                        </button> */}
                     </div>
                     <div className="container-home">
                         <button className="item-menu-home" onClick={() => handleNavigation('/dados-bancarios')}>
