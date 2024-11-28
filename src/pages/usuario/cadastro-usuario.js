@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import '../pages.css';
 import { LogoDiv } from '../../components/LogoDiv';
@@ -28,6 +29,7 @@ const Select = styled.select`
 `;
 
 const CadastroUsuario = () => {
+    const navigate = useNavigate();
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [cpf, setCpf] = useState('');
@@ -180,7 +182,10 @@ const CadastroUsuario = () => {
                     title={popUpMessage.title}
                     body={popUpMessage.body}
                     onCancel={() => setShowPopUp(false)}
-                    onConfirm={() => setShowPopUp(false)}
+                    onConfirm={() => {
+                        navigate('/login');
+                        setShowPopUp(false)
+                    }}
                 />
             )}
         </Container>

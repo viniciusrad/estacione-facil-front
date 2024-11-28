@@ -13,12 +13,17 @@ import { UsuarioContext } from '../../context/UsuarioContext';
 
 export const Login = () => {
 
+  const [userLogin, setUserLogin] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+  const [showPopUp, setShowPopUp] = useState(false);
+  const [messagePopUp, setMessagePopUp] = useState('');
 
+  const { user, setUser } = useContext(UsuarioContext);
   const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
-
+    
     try {
       const response = await fetch('http://localhost:3000/login', {
         method: 'POST',
@@ -26,7 +31,7 @@ export const Login = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          login: userLogin,
+          email: userLogin,
           senha: userPassword
         })
       });
@@ -34,7 +39,7 @@ export const Login = () => {
       const data = await response.json();
       console.log('Resposta do servidor:', data);
 
-      setUser({ tipo: data.usuario.tipo, id: data.usuario.id, nome: data.usuario.nome });
+      setUser({ tipo: data.usuario.tipo, id: data.usuario.id, nome: data.usuario.nome, email: data.usuario.email });
 
       if (response.ok) {
         navigate('/');
@@ -58,12 +63,7 @@ export const Login = () => {
     setUserPassword(event.target.value)
   }
 
-  const [userLogin, setUserLogin] = useState('');
-  const [userPassword, setUserPassword] = useState('');
-  const [showPopUp, setShowPopUp] = useState(false);
-  const [messagePopUp, setMessagePopUp] = useState('');
-
-  const { user, setUser } = useContext(UsuarioContext);
+ 
 
   useEffect(() => {
     setUser(null);

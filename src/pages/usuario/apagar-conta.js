@@ -4,17 +4,21 @@ import '../pages.css';
 import { LogoDiv } from '../../components/LogoDiv';
 import { Container, Input, ButtonContainer, CancelButton, CadastrarButton } from '../../components/StyledComponents';
 import { UsuarioContext } from '../../context/UsuarioContext';
+import PopUp from '../../components/MessagePopUp';
+import { useNavigate } from 'react-router-dom';
 
 
 const ApagarConta = () => {
+  const navigate = useNavigate();
   const { user } = useContext(UsuarioContext);
   const [login, setLogin] = useState(user.email);
   const [senha, setSenha] = useState(user.senha);
+  const [showPopUp, setShowPopUp] = useState(false);
+  const [popUpMessage, setPopUpMessage] = useState({ title: '', body: '' });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aqui você pode adicionar a lógica para processar o login e senha
-    console.log('Dados de agendamento:', { login, senha, id: user.id });
+
     try {
       fetch(`http://localhost:3000/users/${user.id}`, {
         method: 'DELETE',
@@ -23,6 +27,13 @@ const ApagarConta = () => {
       });
     } catch (error) {
       console.error('Erro ao apagar conta:', error);
+    }finally{
+      setShowPopUp(true);
+      setPopUpMessage({
+        title: 'Sucesso',
+        body: 'Conta excluída com sucesso!'
+      });
+      navigate('/login');
     }
   };
 
