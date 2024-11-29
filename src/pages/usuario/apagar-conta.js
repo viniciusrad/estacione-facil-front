@@ -61,7 +61,7 @@ const ApagarConta = () => {
         />
 
         <ButtonContainer>
-          <CancelButton type="button">Cancelar</CancelButton>
+          <CancelButton onClick={() => navigate('/')}>Cancelar</CancelButton>
           <CadastrarButton type="submit" className='btn-cadastrar'>Excluir</CadastrarButton>
         </ButtonContainer>
       </form>

@@ -285,7 +285,7 @@ debugger
             Dados Cadastrais
           </CadastrarButton>
           
-          {user?.tipo !== 'ADMIN' && (
+          {user?.tipo !== 'administrador' && (
             <CadastrarButton 
               type="button" 
               style={{

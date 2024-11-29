@@ -55,7 +55,6 @@ export const Login = () => {
   }
 
   const handleLoginInput = (event) => {
-    console.log(event.target.value)
     setUserLogin(event.target.value)
   }
 

@@ -10,8 +10,10 @@ import {
     CancelButton, 
     CadastrarButton 
 } from '../../components/StyledComponents';
+import { useNavigate } from 'react-router-dom';
 
 const CadastroUsuarioAdmin = () => {
+    const navigate = useNavigate();
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [cpf, setCpf] = useState('');
@@ -121,7 +123,7 @@ const CadastroUsuarioAdmin = () => {
                 />
 
                 <ButtonContainer>
-                    <CancelButton type="button">Cancelar</CancelButton>
+                    <CancelButton type="button" onClick={() => navigate('/')}>Cancelar</CancelButton>
                     <CadastrarButton type="submit" className='btn-cadastrar'>
                         Cadastrar
                     </CadastrarButton>

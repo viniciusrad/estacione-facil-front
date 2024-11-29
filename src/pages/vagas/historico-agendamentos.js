@@ -10,7 +10,7 @@ import {
     CancelButton,
     ConfirmButton as BaseConfirmButton
 } from '../../components/StyledComponents';
-
+import { useNavigate } from 'react-router-dom';
 const StyledConfirmButton = styled(BaseConfirmButton)`
     &:disabled {
         background-color: #cccccc;
@@ -25,6 +25,7 @@ const AgendamentoItem = styled(VagaItem)`
 `;
 
 const HistoricoAgendamentos = () => {
+    const navigate = useNavigate();
     const [showPopUp, setShowPopUp] = useState(false);
     const [agendamentoSelecionado, setAgendamentoSelecionado] = useState(null);
 
@@ -57,7 +58,7 @@ const HistoricoAgendamentos = () => {
             </VagasList>
 
             <ButtonContainer>
-                <CancelButton>Voltar</CancelButton>
+                <CancelButton onClick={() => navigate('/')}>Voltar</CancelButton>
                 <StyledConfirmButton 
                     className='btn-confirmar' 
                     onClick={() => setShowPopUp(true)}

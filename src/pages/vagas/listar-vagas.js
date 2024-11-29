@@ -64,7 +64,7 @@ const ListaVagas = () => {
             </VagasList>
 
             <ButtonContainer>
-                <CancelButton>Cancelar</CancelButton>
+                <CancelButton onClick={() => navigate('/')}>Cancelar</CancelButton>
                 <StyledConfirmButton 
                     className='btn-confirmar' 
                     onClick={() => setShowPopUp(true)}
